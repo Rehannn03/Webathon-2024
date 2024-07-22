@@ -1,0 +1,11 @@
+{
+  "name": "webathon",
+  "version": "1.0.0",
+  "description": "\"Backend for Healthcare\"",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Rehan Shah and Mubashir Tanvar",
+  "license": "ISC"
+}
