@@ -31,6 +31,11 @@ const doctorSchema=new Schema({
         type:Number,
         required:true,
         default:0
+    },
+    verified:{
+        type:Boolean,
+        required:true,
+        default:false
     }
 },{timestamps:true})
 
