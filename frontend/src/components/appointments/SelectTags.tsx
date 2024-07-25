@@ -50,22 +50,28 @@ export const InputTags = forwardRef<HTMLInputElement, InputTagsProps>(
             Add
           </Button>
         </div>
-        <div className="border rounded-md min-h-[2.5rem] overflow-y-auto p-2 flex gap-2 flex-wrap items-center">
-          {value.map((item, idx) => (
-            <Badge key={idx} variant="secondary">
-              {item}
-              <button
-                type="button"
-                className="w-3 ml-2"
-                onClick={() => {
-                  onChange(value.filter((i) => i !== item));
-                }}
-              >
-                <Cross1Icon className="w-3" />
-              </button>
-            </Badge>
-          ))}
-        </div>
+        {
+          value.length === 0 ? (
+            <div className="text-muted-foreground text-sm">No tags added</div>
+          ) : (
+            <div className="border rounded-md min-h-[2.5rem] overflow-y-auto p-2 flex gap-2 flex-wrap items-center">
+              {value.map((item, idx) => (
+                <Badge key={idx} variant="secondary">
+                  {item}
+                  <button
+                    type="button"
+                    className="w-3 ml-2"
+                    onClick={() => {
+                      onChange(value.filter((i) => i !== item));
+                    }}
+                  >
+                    <Cross1Icon className="w-3" />
+                  </button>
+                </Badge>
+              ))}
+            </div>
+          )
+        }
       </>
     );
   }

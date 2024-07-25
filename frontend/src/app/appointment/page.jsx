@@ -79,7 +79,7 @@ function Appointment() {
         <div className='flex flex-col px-12 py-8 gap-y-5'>
           <h1 className='text-3xl font-bold my-4'>Schedule Your Appointment</h1>
           <SelectOption  selectedType={selectedType} setSelectedType={setSelectedType} allTypes={allTypes} />
-          <SelectDoctor selectedDoctor={selectedDoctor} setSelectedDoctor={setSelectedDoctor} allDoctors={allDoctors} />
+          <SelectDoctor selectedDoctor={selectedDoctor} setSelectedDoctor={setSelectedDoctor}/>
           <DatePicker date={selectedDate} setDate={setSelectedDate} />
           <SelectTime timeSlots={timeSlots} selectedTime={selectedTime} setSelectedTime={setSelectedTime} />
           <InputTags value={selectedSymptoms} onChange={setSelectedSymptoms} />
