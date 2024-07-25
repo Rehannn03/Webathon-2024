@@ -28,10 +28,13 @@ const appointmentSchema=new Schema({
     day:{
         type:String,
         required:true
+    },
+    symptoms:{
+        type:String,
+        required:true
     }
-},{timestamps:true
-})
+},
+{timestamps:true})
 
 
-const Appointment=mongoose.model('Appointment',appointmentSchema)
-
+export const Appointment=mongoose.model('Appointment',appointmentSchema)

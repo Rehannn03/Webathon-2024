@@ -21,12 +21,16 @@ const userSchema=new mongoose.Schema({
     },
     profile:{
         type:Object,
-        required:true,
         default:{
             age:0,
             contact:0,
             address:"",
+            gender:"",
+            city:""
         }
+    },
+    avatar:{
+        type:String
     }
 },{
     timestamps:true
