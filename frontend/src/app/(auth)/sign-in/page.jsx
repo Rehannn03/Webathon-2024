@@ -38,7 +38,7 @@ export default function SignInForm() {
           title: "Success",
           description: response.data.message,
         });
-        setIsSubmitting(false);
+        router.replace("/dashboard");
       } catch (error) {
         const axiosError = error;
         let errorMessage = axiosError.response?.data.message;
@@ -47,7 +47,6 @@ export default function SignInForm() {
           description: errorMessage,
           variant: "destructive",
         });
-        setIsSubmitting(false);
       }
   };
   //     const result = await signIn('credentials', {
