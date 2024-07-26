@@ -16,8 +16,10 @@ app.use(cors({
 }))
 
 import userRouter from './routes/user.routes.js';
+import doctorRouter from './routes/doctor.routes.js';
 
 app.use('/api/users',userRouter)
+app.use('/api/doctors',doctorRouter)
 
 
 

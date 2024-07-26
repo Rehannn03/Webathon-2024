@@ -18,14 +18,6 @@ const reportSchema=new Schema({
     details:{
         type:String,
         required:true
-    },
-    diagnosis:{
-        type:String,
-        required:true
-    },
-    prescription:{
-        type:String,
-        required:true
     }
 })
 
