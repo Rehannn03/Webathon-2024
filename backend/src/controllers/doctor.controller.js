@@ -1,13 +1,45 @@
 import { asyncHandler } from "../utils/asyncHandler.js";
 import { ApiError } from "../utils/apiError.js";
 import { ApiResponse } from "../utils/apiResponse.js";
-import Doctor from "../models/doctor.model.js";
-import Appointment from "../models/appointment.model.js";
+import Doctor from "../model/doctor.model.js";
+import Appointment from "../model/appointments.model.js";
 import Consultation from "../model/consultation.model.js";
 const updateInfo=asyncHandler(async(req,res)=>{
     const user=req.user
+
     const {specialization,experience,qualification,consultationFee}=req.body
 
+    const checkDoctor=await Doctor.findOne({userId:user._id})
+    if(checkDoctor){
+        const doctor=await Doctor.findOneAndUpdate({
+            userId:user._id
+        },
+        {
+            $set:{
+                specialization,
+                experience,
+                qualification,
+                consultationFee
+            }
+        },
+        {
+            new:true
+        })
+
+        if(!doctor){
+            throw new ApiError(400,'Doctor not updated')
+        }
+
+        return res
+        .status(200)
+        .json(
+            new ApiResponse(200,{
+                message:'Doctor updated successfully',
+                doctor
+            })
+        )
+    }
+    
     const doctor=await Doctor.create({
         userId:user._id,
         specialization,
@@ -57,10 +89,16 @@ const getAllDoctors=asyncHandler(asyncHandler(async(_,res)=>{
 }))
 
 const getAppointments=asyncHandler(async(req,res)=>{
+    const checkVerify=await Doctor.findOne({userId:req.user._id})
+
+    if(checkVerify.verified==false){
+        throw new ApiError(403,'Doctor not verified')
+    }
+
     const appointments=await Appointment.aggregate([
         {
             $match:{
-                doctorId:req.user._id
+                doctorId:checkVerify._id
             }
         },
         {
@@ -80,6 +118,8 @@ const getAppointments=asyncHandler(async(req,res)=>{
                 date:1,
                 time:1,
                 status:1,
+                symptoms:1,
+                day:1,
                 patient:{
                     _id:1,
                     name:1,
@@ -101,6 +141,11 @@ const getAppointments=asyncHandler(async(req,res)=>{
 
 const updateAppointment=asyncHandler(async(req,res)=>{
     const {appointmentId,status,note}=req.body
+    const checkVerify=await Doctor.findOne({userId:req.user._id})
+
+    if(checkVerify.verified==false){
+        throw new ApiError(403,'Doctor not verified')
+    }
     if(status=='rejected' && !note){
         throw new ApiError(400,'Note is required for rejected appointments')   
     }
@@ -132,13 +177,18 @@ const updateAppointment=asyncHandler(async(req,res)=>{
 })
 
 const fillConsultation=asyncHandler(async(req,res)=>{
-    const {appointmentId,diagnosis,prescription,followUp}=req.body
+    const {appointmentId,diagnosis,prescription,followUp,symptoms}=req.body
+    const checkVerify=await Doctor.findOne({userId:req.user._id})
 
+    if(checkVerify.verified==false){
+        throw new ApiError(403,'Doctor not verified')
+    }
     const consultation=await Consultation.create({
         appointmentId,
         diagnosis,
         prescription,
-        followUp
+        followUp,
+        symptoms
     })
 
     if(!consultation){

@@ -18,8 +18,15 @@ const consultationSchema=new mongoose.Schema({
     },
     prescription:[
         {
-            type:String,
-            required:true
+            type:Object,
+            required:true,
+            default:{
+                medicine:'',
+                morning:0,
+                afternoon:0,
+                night:0,
+                notes:''
+            }
         }
     ],
     followUp:{

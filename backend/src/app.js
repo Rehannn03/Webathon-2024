@@ -1,4 +1,4 @@
-import express, { urlencoded } from 'express';
+import express from 'express';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
 
@@ -17,10 +17,10 @@ app.use(cors({
 
 import userRouter from './routes/user.routes.js';
 import doctorRouter from './routes/doctor.routes.js';
-
+import patientRouter from './routes/patient.routes.js';
 app.use('/api/users',userRouter)
 app.use('/api/doctors',doctorRouter)
-
+app.use('/api/patients',patientRouter)
 
 
 export default app;

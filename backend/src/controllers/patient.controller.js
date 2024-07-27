@@ -2,12 +2,13 @@ import User from "../model/user.model.js";
 import { ApiError } from "../utils/apiError.js";
 import { ApiResponse } from "../utils/apiResponse.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
-import { Appointment } from "../model/appointments.model.js";
+import Appointment from "../model/appointments.model.js";
 import Report from "../model/reports.model.js";
+import Consultation from "../model/consultation.model.js";
 const scheduleAppointment = asyncHandler(async(req,res)=>{
-    const {patientId,doctorId,date,time,day,symptoms,note}=req.body
+    const {doctorId,date,time,day,symptoms,note}=req.body
     const appointment=await Appointment.create({
-        patientId,
+        patientId:req.user._id,
         doctorId,
         date,
         time,
@@ -31,6 +32,7 @@ const scheduleAppointment = asyncHandler(async(req,res)=>{
 })
 
 const viewAppointments=asyncHandler(async(req,res)=>{
+    console.log(req.user._id);
     const appointments=await Appointment.aggregate([
         {
             $match:{
@@ -115,8 +117,28 @@ const addReports=asyncHandler(async(req,res)=>{
 
 })
 
+const viewConsultations=asyncHandler(async(req,res)=>{
+    const appointment=await Appointment.findOne({patientId:req.user._id})
+
+    if(!appointment){
+        throw new ApiError(404,'Appointment not found')
+    }
+
+    const consultation=await Consultation.findOne({appointmentId:appointment._id}).select('-appointmentId -_id -createdAt -updatedAt -__v')
+
+
+    return res
+    .status(200)
+    .json(
+        new ApiResponse(200,{
+            consultation
+        })
+    )
+})
+
 export{
     scheduleAppointment,
     viewAppointments,
-    addReports
+    addReports,
+    viewConsultations
 }
