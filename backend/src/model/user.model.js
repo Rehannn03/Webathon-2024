@@ -37,7 +37,7 @@ const userSchema=new mongoose.Schema({
 })
 
 
-const User=mongoose.model('User',userSchema)
+
 
 userSchema.pre('save',async function(next){
     if(!this.isModified('password')){
@@ -72,10 +72,10 @@ userSchema.methods.generateRefreshToken=function(){
         },
         process.env.JWT_REFRESH_SECRET,
         {
-            expiresIn:process.env.REFRESH_EXPIRY
+            expiresIn:process.env.JWT_REFRESH_EXPIRY
         }
     )
 
 }
-
+const User=mongoose.model('User',userSchema)
 export default User;

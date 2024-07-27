@@ -8,8 +8,8 @@ export const usernameValidation = z
 
 
 export const signUpSchema = z.object({
-    username: usernameValidation,
+    name: usernameValidation,
     email: z.string().email({message: "Invalid email address"}),
-    password: z.string().regex(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$/, "Password must contain at least 6 characters, one uppercase letter, one lowercase letter, and one number"),
+    password: z.string().regex(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/, "Password must contain at least 8 characters, one uppercase letter, one lowercase letter, and one number"),
 
 })

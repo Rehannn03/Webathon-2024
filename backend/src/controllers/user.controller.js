@@ -4,20 +4,21 @@ import { ApiResponse } from '../utils/apiResponse.js'
 import {asyncHandler} from '../utils/asyncHandler.js'
 import uploadOnCloudinary from '../utils/cloudinary.js'
 const registerUser=asyncHandler(async(req,res)=>{
-    const {username,email,password,role}=req.body
+    const {name,email,password,role}=req.body
     const existingUser=await User.findOne({email})
 
+    console.log(req.body)
     if(existingUser){
         throw new ApiError(400,'User already exists')
     }
 
     const user=await User.create({
-        username,
+        name,
         email,
         password,
         role,
-        profile,
-        refreshToken
+        // profile,
+        // refreshToken
     })
     const accessToken=await user.generateAccessToken()
     const refreshToken=await user.generateRefreshToken()
@@ -37,7 +38,7 @@ const registerUser=asyncHandler(async(req,res)=>{
 })
 
 const loginUser=asyncHandler(async(req,res)=>{
-    const {email,password,role}=req.body
+    const {email,password}=req.body
 
     const user=await User.findOne({email})
 
