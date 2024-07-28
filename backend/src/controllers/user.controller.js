@@ -7,6 +7,7 @@ const registerUser=asyncHandler(async(req,res)=>{
     const {name,email,password,role}=req.body
     const existingUser=await User.findOne({email})
 
+    console.log(req.body)
     if(existingUser){
         throw new ApiError(400,'User already exists')
     }
@@ -26,12 +27,12 @@ const registerUser=asyncHandler(async(req,res)=>{
 })
 
 const loginUser=asyncHandler(async(req,res)=>{
-    const {email,password,role}=req.body
+    const {email,password}=req.body
 
     const user=await User.findOne({
         $and:[
             {email},
-            {role}
+            //{password}
         ]
     }).select('-createdAt -updatedAt -__v -refreshToken')
 

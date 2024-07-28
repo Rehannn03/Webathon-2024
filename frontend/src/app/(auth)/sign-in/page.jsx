@@ -16,6 +16,8 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useToast } from "@/components/ui/use-toast";
 import { signInSchema } from "@/schemas/signInSchema";
+import apiClient from "@/api-client/apiClient";
+import axios from "axios";
 
 export default function SignInForm() {
   const router = useRouter();
@@ -32,8 +34,13 @@ export default function SignInForm() {
   const onSubmit = async (data) => {
     console.log(data); //TODO: Remove this line
     try {
-        //TODO: Add the API endpoint for sign-in
-        const response = await axios.get("/api/sign-in", data);
+        //TODO: Add the API endpoint for sign-in\
+        const bodyData = {
+          email: data.identifier,
+          password: data.password,
+        }
+        const response = await apiClient.post("/users/login", bodyData);
+        //const response = await axios.get("", data);
         toast({
           title: "Success",
           description: response.data.message,
