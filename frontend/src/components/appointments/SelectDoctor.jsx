@@ -1,6 +1,6 @@
 
 import React, { useEffect, useState } from 'react'
-import DoctorModal from "@/components/DoctorModal";
+import DoctorModal from "@/components/appointments/doctorModal";
 import Image from 'next/image';
 
 function SelectDoctor( {selectedDoctor, setSelectedDoctor}) {

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import DoctorModal from "@/components/DoctorModal";
+import DoctorModal from "@/components/appointments/doctorModal";
 import { Image, User } from "lucide-react";
 
 // Steal Dummy Data of Doctors
