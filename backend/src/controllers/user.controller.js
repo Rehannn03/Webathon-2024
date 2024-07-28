@@ -16,31 +16,25 @@ const registerUser=asyncHandler(async(req,res)=>{
         name,
         email,
         password,
-        role,
-        // profile,
-        // refreshToken
+        role
     })
-    const accessToken=await user.generateAccessToken()
-    const refreshToken=await user.generateRefreshToken()
     return res
     .status(201)
-    .cookie('accessToken',accessToken,{
-        httpOnly:true,
-        sameSite:'none',
-        secure:true
-    })
-    .cookie('refreshToken',refreshToken,{
-        httpOnly:true,
-        sameSite:'none',
-        secure:true
-    })
-    .json(new ApiResponse(201,{user}))
+    .json(new ApiResponse(201,{
+        message:'User registered successfully',
+        user
+    }))
 })
 
 const loginUser=asyncHandler(async(req,res)=>{
     const {email,password}=req.body
 
-    const user=await User.findOne({email})
+    const user=await User.findOne({
+        $and:[
+            {email},
+            // {password}
+        ]
+    }).select('-createdAt -updatedAt -__v -refreshToken')
 
     if(!user){
         throw new ApiError(404,'User not found')
@@ -54,6 +48,8 @@ const loginUser=asyncHandler(async(req,res)=>{
 
     const accessToken=await user.generateAccessToken()
     const refreshToken=await user.generateRefreshToken()
+    user.refreshToken=refreshToken
+    await user.save()
     const options={
         httpOnly:true,
         secure:true,
@@ -102,21 +98,27 @@ const getUserProfile=asyncHandler(async(req,res)=>{
 })
 
 const updateProfile=asyncHandler(async(req,res)=>{
-    const {profile}=req.body
-
-    const avatarPath=req.files?.avatar[0]?.path
+    const {age,contact,address,gender,city}=req.body
+    const avatarPath=req.file?.path
     const avatar=await uploadOnCloudinary(avatarPath)
     const user=await User.findByIdAndUpdate(req.user._id,
         {
         $set:{
-            profile,
-            avatar
+            profile:{
+                age,
+                contact,
+                address,
+                gender,
+                city
+            },
+            avatar:avatar.secure_url
         }
     },
     {
-        new:true
+        new:true,
+        runValidators:true
     }
-)
+).select('-createdAt -updatedAt -__v -refreshToken -password')
     
         return res
         .status(200)

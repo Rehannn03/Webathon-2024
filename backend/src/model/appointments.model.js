@@ -32,9 +32,14 @@ const appointmentSchema=new Schema({
     symptoms:{
         type:String,
         required:true
+    },
+    note:{
+        type:String
     }
 },
 {timestamps:true})
 
 
-export const Appointment=mongoose.model('Appointment',appointmentSchema)
+const Appointment=mongoose.model('Appointment',appointmentSchema)
+
+export default Appointment;
