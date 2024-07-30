@@ -1,58 +1,78 @@
-
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from "react";
 import DoctorModal from "@/components/appointments/doctorModal";
-import Image from 'next/image';
+import Image from "next/image";
 
-function SelectDoctor( {selectedDoctor, setSelectedDoctor}) {
-    const [isModalOpen, setIsModalOpen] = useState(false);
-    const [allDoctors, setAllDoctors] = useState([
-        {
-            pfp: "https://cdn.pfps.gg/pfps/3178-goofy-garfield.png",
-            name: "Dr. Bingus",
-            specialization: "Cardiology",
-            experience: 10,
-            qualification: "MBBS, MD",
-            consultationFee: 100,
-        },
-        {
-            pfp: "https://cdn.pfps.gg/pfps/3178-goofy-garfield.png",
-            name: "Dr. Sugondese Nuts",
-            specialization: "Dermatology",
-            experience: 8,
-            qualification: "MBBS, MD",
-            consultationFee: 80,
-        },
-        {
-            pfp: "https://cdn.pfps.gg/pfps/3178-goofy-garfield.png",
-            name: "Dr. Tyler Durden",
-            specialization: "Dermatology",
-            experience: 8,
-            qualification: "MBBS, MD",
-            consultationFee: 80,
-        },
-    ]);
+function SelectDoctor({ selectedDoctor, setSelectedDoctor }) {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [allDoctors, setAllDoctors] = useState([
+    {
+      pfp: "https://cdn.pfps.gg/pfps/3178-goofy-garfield.png",
+      name: "Dr. Bingus",
+      specialization: "Cardiology",
+      experience: 10,
+      qualification: "MBBS, MD",
+      consultationFee: 100,
+    },
+    {
+      pfp: "https://cdn.pfps.gg/pfps/3178-goofy-garfield.png",
+      name: "Dr. Jone Doe",
+      specialization: "Dermatology",
+      experience: 8,
+      qualification: "MBBS, MD",
+      consultationFee: 80,
+    },
+    {
+      pfp: "https://cdn.pfps.gg/pfps/3178-goofy-garfield.png",
+      name: "Dr. Tyler Durden",
+      specialization: "Dermatology",
+      experience: 8,
+      qualification: "MBBS, MD",
+      consultationFee: 80,
+    },
+    {
+      pfp: "https://cdn.pfps.gg/pfps/3178-goofy-garfield.png",
+      name: "Dr. James Smith",
+      specialization: "Cardiology",
+      experience: 10,
+      qualification: "MBBS, MD",
+      consultationFee: 100,
+    },
+    {
+      pfp: "https://cdn.pfps.gg/pfps/3178-goofy-garfield.png",
+      name: "Dr. William Butcher",
+      specialization: "Dermatology",
+      experience: 8,
+      qualification: "MBBS, MD",
+      consultationFee: 80,
+    },
+    {
+      pfp: "https://cdn.pfps.gg/pfps/3178-goofy-garfield.png",
+      name: "Dr. Mark",
+      specialization: "Dermatology",
+      experience: 8,
+      qualification: "MBBS, MD",
+      consultationFee: 80,
+    },
+  ]);
 
-    useEffect(() => {
-                                                        //  TODO: Fetch all doctors when modal is opened
-                                                        // DEP ARRAY: isModalOpen
-                                                        // Add loader while fetching data
+  useEffect(() => {
+    //  TODO: Fetch all doctors when modal is opened
+    // DEP ARRAY: isModalOpen
+    // Add loader while fetching data
+  }, []);
 
-    } ,[])
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
 
-
-    const openModal = () => {
-        setIsModalOpen(true);
-    };
-
-    const closeModal = () => {
-        setIsModalOpen(false);
-    };
-    const handleDoctorSelect = (doctor) => {
-        setSelectedDoctor(doctor);
-        //TODO: REMOVE THIS CONSOLE LOG
-        console.log("Selected Doctor:", doctor);
-       
-    };
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+  const handleDoctorSelect = (doctor) => {
+    setSelectedDoctor(doctor);
+    //TODO: REMOVE THIS CONSOLE LOG
+    console.log("Selected Doctor:", doctor);
+  };
   return (
     <div className="flex flex-row">
       <button
@@ -69,7 +89,7 @@ function SelectDoctor( {selectedDoctor, setSelectedDoctor}) {
           onSelectDoctor={handleDoctorSelect}
         />
       )}
-      
+
       {selectedDoctor && (
         <div className="flex items-center gap-4 px-6 w-2/3">
           <Image
@@ -92,4 +112,4 @@ function SelectDoctor( {selectedDoctor, setSelectedDoctor}) {
   );
 }
 
-export default SelectDoctor
+export default SelectDoctor;

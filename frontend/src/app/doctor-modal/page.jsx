@@ -17,7 +17,7 @@ const doctors = [
   },
   {
     pfp: "https://cdn.pfps.gg/pfps/3178-goofy-garfield.png",
-    name: "Dr. Sugondese Nuts",
+    name: "Dr. Jone Doe",
     specialization: "Dermatology",
     experience: 8,
     qualification: "MBBS, MD",
@@ -33,7 +33,7 @@ const doctors = [
   },
   {
     pfp: "https://cdn.pfps.gg/pfps/3178-goofy-garfield.png",
-    name: "Dr. Bingus",
+    name: "Dr. James Smith",
     specialization: "Cardiology",
     experience: 10,
     qualification: "MBBS, MD",
@@ -41,7 +41,7 @@ const doctors = [
   },
   {
     pfp: "https://cdn.pfps.gg/pfps/3178-goofy-garfield.png",
-    name: "Dr. Sugondese Nuts",
+    name: "Dr. William Butcher",
     specialization: "Dermatology",
     experience: 8,
     qualification: "MBBS, MD",
@@ -49,7 +49,7 @@ const doctors = [
   },
   {
     pfp: "https://cdn.pfps.gg/pfps/3178-goofy-garfield.png",
-    name: "Dr. Tyler Durden",
+    name: "Dr. Mark",
     specialization: "Dermatology",
     experience: 8,
     qualification: "MBBS, MD",
