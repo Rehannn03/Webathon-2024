@@ -1,8 +1,10 @@
 "use client"
 import { CTA, SelectDoctor,SelectOption, DatePicker, SelectTime, InputTags } from '@/components/appointments'
 import React, { useEffect, useState } from 'react'
+import { useUserStore } from '@/stores/store'
 
 function Appointment() {
+  const { user } = useUserStore() 
   const [allTypes, setAllTypes] = useState([
       {id: 1, name: 'General Consultation'},
       {id: 2, name: 'Speciality Consultation'},
@@ -39,6 +41,10 @@ function Appointment() {
     // Fetch all types
     // Fetch all doctors
     // DEP ARRAY: the type selected and access token
+
+    //User store
+    console.log("This Data is from the global store");
+    console.log(user)
   }, [])
 
   const validateForm = () => {

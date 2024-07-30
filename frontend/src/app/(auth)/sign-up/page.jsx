@@ -24,7 +24,7 @@ import { use, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { signUpSchema } from "@/schemas/signUpSchema";
 import { Loader2 } from "lucide-react";
-
+import { useUserStore } from "@/stores/store";
 // const formSchema = z.object({});
 
 const page = () => {
@@ -35,6 +35,7 @@ const page = () => {
   const debounced = useDebounceCallback(setName, 300);
   const { toast } = useToast();
   const router = useRouter();
+  const { user, update} = useUserStore();
 
   const form = useForm({
     resolver: zodResolver(signUpSchema),
@@ -72,6 +73,10 @@ const page = () => {
     try {
       // const response = await axios.post("../../../../../backend/src/controllers/registerUser", data);
       const tempData = {role: "patient", ...data }                                                            // TODO: Remove this line
+      const {name, role } =  tempData;
+      const tempProfile = {name, role}                                                                        // TODO: Remove this line
+      update(tempProfile);                                                                                   
+       
       console.log("This is tempData",tempData);                                                               //  TODO: Remove this line 
       console.log("This is raw data from form: ",data);                                                       //  TODO: Remove this line
       const response = await apiClient.post("/users/register", {...data, role: "patient"});
@@ -79,10 +84,11 @@ const page = () => {
         title: "Success",
         description: "Sign Up Successful",
       });
-      // router.replace(`/verify/${name}`);                                                                   //TODO: If time permits, implement verify by resend
+      // router.replace(`/verify/${name}`);
+      router.replace(`/appointment`);                                                                   //TODO: If time permits, implement verify by resend
       setIsSubmitting(false);
     } catch (error) {
-      
+      const errorMessage = error
       console.log("This is the error",error);                                                                 //  TODO: Remove this line
       toast({
         title: "Sign Up Failed",
