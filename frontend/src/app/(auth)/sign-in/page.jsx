@@ -18,9 +18,11 @@ import { useToast } from "@/components/ui/use-toast";
 import { signInSchema } from "@/schemas/signInSchema";
 import apiClient from "@/api-client/apiClient";
 import axios from "axios";
+import { useUserStore } from "@/stores/store";
 
 export default function SignInForm() {
   const router = useRouter();
+  const { user, update } = useUserStore();
 
   const form = useForm({
     resolver: zodResolver(signInSchema),
@@ -34,27 +36,30 @@ export default function SignInForm() {
   const onSubmit = async (data) => {
     console.log(data); //TODO: Remove this line
     try {
-        //TODO: Add the API endpoint for sign-in\
-        const bodyData = {
-          email: data.identifier,
-          password: data.password,
-        }
-        const response = await apiClient.post("/users/login", bodyData);
-        //const response = await axios.get("", data);
-        toast({
-          title: "Success",
-          description: response.data.message,
-        });
-        router.replace("/dashboard");
-      } catch (error) {
-        const axiosError = error;
-        let errorMessage = axiosError.response?.data.message;
-        toast({
-          title: "Sign In Failed",
-          description: errorMessage,
-          variant: "destructive",
-        });
-      }
+      //TODO: Add the API endpoint for sign-in\
+      const bodyData = {
+        email: data.identifier,
+        password: data.password,
+      };
+      const response = await apiClient.post("/users/login", bodyData);
+      toast({
+        title: "Success",
+        description: response.data.message,
+      });
+      const userData = await apiClient.get("/users/profile");
+      const user = userData.data.data.user;
+      update(user);
+
+      router.replace("/appointment");
+    } catch (error) {
+      const axiosError = error;
+      let errorMessage = axiosError.response?.data.message;
+      toast({
+        title: "Sign In Failed",
+        description: errorMessage,
+        variant: "destructive",
+      });
+    }
   };
   //     const result = await signIn('credentials', {
   //       redirect: false,
@@ -87,7 +92,7 @@ export default function SignInForm() {
     <div className="flex justify-center items-center min-h-screen bg-gray-800">
       <div className="w-full max-w-md p-8 space-y-8 bg-white rounded-lg shadow-md">
         <div className="text-center">
-            //TODO: Add the website name
+          //TODO: Add the website name
           <h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl mb-6">
             Welcome Back to Website Name
           </h1>
