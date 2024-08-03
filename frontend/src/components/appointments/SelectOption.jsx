@@ -32,7 +32,7 @@ function SelectOption({selectedType, setSelectedType, allTypes}) {
                 {
                     console.log(allTypes)
                 }
-                {selectedType ? allTypes.filter((type) => type.id === selectedType)[0].name : "Select Speciality"}
+                {selectedType ? allTypes.filter((type) => type.id === selectedType)[0]?.name : "Select Speciality"}
             </SelectValue>
         </SelectTrigger>
         <SelectContent>

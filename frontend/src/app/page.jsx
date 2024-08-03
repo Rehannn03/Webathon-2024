@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Hero from "../components/Hero/Hero";
 import Head from "next/head";
+import  CTA  from "@/components/appointments/CTA";
 
 export default function Home() {
   return (
@@ -12,7 +13,7 @@ export default function Home() {
       </Head>
 
       <Hero />
-
+      <CTA />
       {/* Other components and content */}
     </div>
   );

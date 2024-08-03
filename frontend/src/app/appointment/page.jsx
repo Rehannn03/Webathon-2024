@@ -2,9 +2,10 @@
 import { CTA, SelectDoctor,SelectOption, DatePicker, SelectTime, InputTags } from '@/components/appointments'
 import React, { useEffect, useState } from 'react'
 import { useUserStore } from '@/stores/store'
+import {fetchAndSetUserStore} from '@/lib/fetchAndSetUserStore'
 
 function Appointment() {
-  const { user } = useUserStore() 
+  const { user, update } = useUserStore() 
   const [allTypes, setAllTypes] = useState([
       {id: 1, name: 'General Consultation'},
       {id: 2, name: 'Speciality Consultation'},
@@ -21,7 +22,7 @@ function Appointment() {
   ]
   
   // Form States
-  const [selectedType, setSelectedType] = useState('')
+  const [selectedType, setSelectedType] = useState(allTypes[0].id)
   const [selectedDoctor, setSelectedDoctor] = useState(null)
   const [selectedDate, setSelectedDate] = useState(new Date())
   const [selectedTime, setSelectedTime] = useState('')
@@ -29,15 +30,12 @@ function Appointment() {
   // const user = useContext(UserContext)                         TODO : Add User Context
 
   useEffect(() => {
-    // if user is not available (access token // UID is not available) then redirect to login page 
-    // if token is available then fetch User Data
-    // Fetch and set userdata -> ADD this function to helpers
-    // Set User Data in Context
-
+    if (!user)
+    fetchAndSetUserStore(update)
   }, [])
 
   useEffect(() => {
-    // if user is available (access token // UID is available) then only fetch the data
+    // if user is available (access token // UID is available) then only fetch the data 
     // Fetch all types
     // Fetch all doctors
     // DEP ARRAY: the type selected and access token
@@ -45,7 +43,7 @@ function Appointment() {
     //User store
     console.log("This Data is from the global store");
     console.log(user)
-  }, [])
+  }, [user])
 
   const validateForm = () => {
     console.log(
