@@ -4,6 +4,7 @@ const nextConfig = {
     images: {
         domains: ['localhost', 'cdn.pfps.gg'],
     },
+    
 };
 
 export default nextConfig;
