@@ -3,6 +3,8 @@ import { CTA, SelectDoctor,SelectOption, DatePicker, SelectTime, InputTags } fro
 import React, { useEffect, useState } from 'react'
 import { useUserStore } from '@/stores/store'
 import {fetchAndSetUserStore} from '@/lib/fetchAndSetUserStore'
+import { useToast } from '@/components/ui/use-toast'
+import apiClient from '@/api-client/apiClient';
 
 function Appointment() {
   const { user, update } = useUserStore() 
@@ -25,9 +27,9 @@ function Appointment() {
   const [selectedType, setSelectedType] = useState(allTypes[0].id)
   const [selectedDoctor, setSelectedDoctor] = useState(null)
   const [selectedDate, setSelectedDate] = useState(new Date())
-  const [selectedTime, setSelectedTime] = useState('')
+  const [selectedTime, setSelectedTime] = useState(null)
   const [selectedSymptoms, setSelectedSymptoms] = useState([])
-  // const user = useContext(UserContext)                         TODO : Add User Context
+  const { toast } = useToast()
 
   useEffect(() => {
     if (!user)
@@ -45,31 +47,77 @@ function Appointment() {
     console.log(user)
   }, [user])
 
-  const validateForm = () => {
-    console.log(
-      selectedType,
-      selectedDoctor.name,
-      selectedDate,
-      selectedTime,
-      selectedSymptoms
-    )
-    // validate the form
-    // if doctor is not selected
-    // if date is not selected
-    // if time is not selected
-    // if symptoms are not selected
-    // if all are selected then return true
-    // else return false
+  const checkIfEmpty = (data) => {
+    return data === null || data === undefined || data === ''
   }
 
-  const bookAppointment = () => {
+  const validateForm = () => {
+    if (checkIfEmpty(selectedType)) {
+      toast({
+        title: 'Error',
+        description: 'Please select the type of appointment',
+        variant: 'destructive'
+      })
+      return false
+    } else if (checkIfEmpty(selectedDoctor)) {
+      toast({
+        title: 'Error',
+        description: 'Please select the doctor',
+        variant: 'destructive'
+      })
+      return false
+    } else if (checkIfEmpty(selectedTime)) {
+      toast({
+        title: 'Error',
+        description: 'Please select the time slot',
+        variant: 'destructive'
+      })
+      return false
+    } else if (selectedSymptoms.length === 0) {
+      toast({
+        title: 'Error',
+        description: 'Please enter the symptoms',
+        variant: 'destructive'
+      })
+      return false
+    } 
+    return true
+  }
+
+  const bookAppointment = async () => {
 
     if (validateForm()) {
-      // if form is validated then
+      console.log('Form is valid')
       // make API req
+      const response = await apiClient.post('/patients/scheduleAppointment', {
+        doctorId: selectedDoctor._id,
+        date: selectedDate,
+        time: selectedTime,
+        day: selectedDate.getDay(),
+        symptoms: selectedSymptoms,
+        notes: ''
+      })
       // if 200 then show the success message
-      // else show the error message
+      if (response.status === 201) {
+        toast({
+          title: 'Success',
+          description: response.data.message,
+          variant: 'success'
+        })
+      } else {
+        // else show the error message
+        toast({
+          title: 'Error',
+          description: response.data.message,
+          variant: 'destructive'
+        })
+      }
       // clear the form
+      setSelectedType(allTypes[0].id)
+      setSelectedDoctor(null)
+      setSelectedDate(new Date())
+      setSelectedTime(null)
+      setSelectedSymptoms([])
     }
 
   }

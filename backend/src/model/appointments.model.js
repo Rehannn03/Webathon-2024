@@ -30,7 +30,7 @@ const appointmentSchema=new Schema({
         required:true
     },
     symptoms:{
-        type:String,
+        type: Array,           // Array of strings rahega please change if there is any other place it needs to be changed
         required:true
     },
     note:{
