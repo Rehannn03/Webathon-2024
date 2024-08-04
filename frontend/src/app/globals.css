@@ -59,3 +59,7 @@
     @apply bg-background text-foreground;
   }
 }
+
+::selection {
+  background-color: hsl(213 10% 80%);
+}

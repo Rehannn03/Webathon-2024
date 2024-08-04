@@ -1,7 +1,9 @@
 "use client"
 import heroImage from '@/../public/heroImage.png';
+import Logo from "@/../public/logo.png";
 import Image from 'next/image';
 import { useState } from 'react';
+
 const  Hero = () => {
     const [mobileNavOpen, setMobileNavOpen] = useState(false);
   
@@ -14,7 +16,7 @@ const  Hero = () => {
                 <div className="flex flex-wrap items-center">
                   <div className="w-auto">
                     <a href="#">
-                      <img src="zanrly-assets/logos/zanrly-logo.svg" alt="Logo" />
+                      <Image src={Logo} alt="Logo" width={45}/>
                     </a>
                   </div>
                 </div>
@@ -119,16 +121,16 @@ const  Hero = () => {
           <div className="px-8 py-11 bg-white rounded-3xl">
             <div className="flex flex-wrap justify-center sm:justify-around -m-2">
               <div className="w-full sm:w-auto p-2">
-                <img className="mx-auto" src="zanrly-assets/images/headers/brand.png" alt="Add Something" />
+                <Image className="mx-auto" src="" alt="Add Something" />
               </div>
               <div className="w-full sm:w-auto p-2">
-                <img className="mx-auto" src="zanrly-assets/images/headers/brand2.png" alt="Add Something" />
+                <Image className="mx-auto" src="" alt="Add Something" />
               </div>
               <div className="w-full sm:w-auto p-2">
-                <img className="mx-auto" src="zanrly-assets/images/headers/brand3.png" alt="Add Something" />
+                <Image className="mx-auto" src="" alt="Add Something" />
               </div>
               <div className="w-full sm:w-auto p-2">
-                <img className="mx-auto" src="zanrly-assets/images/headers/brand4.png" alt="Add Something" />
+                <Image className="mx-auto" src="" alt="Add Something" />
               </div>
             </div>
           </div>
