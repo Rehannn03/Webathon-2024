@@ -1,4 +1,4 @@
-import Doctor from "../model/doctor.model";
+import Doctor from "../model/doctor.model.js";
 import { ApiError } from "../utils/apiError.js";
 import { ApiResponse } from "../utils/apiResponse.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
