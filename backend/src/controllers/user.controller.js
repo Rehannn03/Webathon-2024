@@ -31,8 +31,7 @@ const loginUser=asyncHandler(async(req,res)=>{
 
     const user=await User.findOne({
         $and:[
-            {email},
-            //{password}
+            {email}
         ]
     }).select('-createdAt -updatedAt -__v -refreshToken')
 

@@ -22,5 +22,9 @@ app.use('/api/users',userRouter)
 app.use('/api/doctors',doctorRouter)
 app.use('/api/patients',patientRouter)
 
+app.get('/',(req,res)=>{
+    res.send('API is running')
+})
+
 
 export default app;
