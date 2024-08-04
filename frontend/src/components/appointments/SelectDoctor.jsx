@@ -46,7 +46,7 @@ function SelectDoctor({ selectedDoctor, setSelectedDoctor }) {
   return (
     <div className="flex flex-row">
       <button
-        className="py-2 px-4 w-1/3 text-white font-medium rounded-md shadow-2xl bg-primary hover:bg-accent transition ease-in-out duration-200"
+        className="py-2 px-4 w-1/2 text-white font-medium rounded-md shadow-2xl bg-primary hover:bg-accent transition ease-in-out duration-200"
         type="button"
         onClick={openModal}
       >
@@ -62,9 +62,9 @@ function SelectDoctor({ selectedDoctor, setSelectedDoctor }) {
       )}
 
       {selectedDoctor && (
-        <div className="flex items-center gap-4 px-6 w-2/3">
+        <div className="flex items-center gap-4 px-6 w-1/2">
           <Image
-            src={selectedDoctor?.pfp}
+            src={selectedDoctor?.userId?.avatar}
             alt="doctor"
             className="w-10 h-10 rounded-full"
             style={{ objectFit: "cover" }}
@@ -72,7 +72,7 @@ function SelectDoctor({ selectedDoctor, setSelectedDoctor }) {
             height={40}
           />
           <div className="pl-">
-            <h3 className="text-lg font-semibold">{selectedDoctor?.name}</h3>
+            <h3 className="text-lg font-semibold">{selectedDoctor?.userId?.name}</h3>
             <p className="text-sm text-gray-500">
               {selectedDoctor?.specialization}
             </p>

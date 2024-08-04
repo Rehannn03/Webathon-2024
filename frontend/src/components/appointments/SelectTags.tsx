@@ -31,7 +31,7 @@ export const InputTags = forwardRef<HTMLInputElement, InputTagsProps>(
               if (e.key === "Enter") {
                 e.preventDefault();
                 addPendingDataPoint();
-              } else if (e.key === "," || e.key === " ") {
+              } else if (e.key === ",") {
                 e.preventDefault();
                 addPendingDataPoint();
               }
@@ -52,9 +52,10 @@ export const InputTags = forwardRef<HTMLInputElement, InputTagsProps>(
           value.length === 0 ? (
             <div className="text-muted-foreground text-sm">No tags added</div>
           ) : (
-            <div className="border rounded-md min-h-[2.5rem] overflow-y-auto p-2 flex gap-2 flex-wrap items-center">
+            <div className="verflow-y-auto p-2 flex gap-2 flex-wrap items-center">
               {value.map((item, idx) => (
-                <Badge key={idx} variant="secondary" className={idx === 0 ? "rounded-tl-none" : idx === value.length - 1 ? "rounded-bl-none" : ""}>
+                //                 <Badge key={idx} variant="secondary" className={idx === 0 ? "rounded-tl-none" : idx === value.length - 1 ? "rounded-bl-none" : ""}>
+                <div key={idx} className={`inline-flex border-transparent bg-secondary text-secondary-foreground hover:bg-secondary/80 items-center rounded-md border px-2.5 py-0.5 text-xs font-semibold ${idx === 0 ? "rounded-tl-none" : idx === value.length - 1 ? "rounded-bl-none" : ""}`}>
                   {item}
                   <button
                     type="button"
@@ -63,9 +64,9 @@ export const InputTags = forwardRef<HTMLInputElement, InputTagsProps>(
                       onChange(value.filter((i) => i !== item));
                     }}
                   >
-                    <Cross1Icon className="w-3" />
+                    <Cross1Icon className="w-2" />
                   </button>
-                </Badge>
+                </div>
               ))}
             </div>
           )

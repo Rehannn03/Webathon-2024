@@ -137,7 +137,7 @@ function Appointment() {
           <InputTags value={selectedSymptoms} onChange={setSelectedSymptoms} />
           <div className='flex justify-end'>
             <button
-              className='py-2 px-4 w-1/2 md:w-1/3 text-white font-medium rounded-md shadow-2xl bg-primary hover:bg-accent transition ease-in-out duration-200'
+              className='py-2 px-4 w-1/2  text-white font-medium rounded-md shadow-2xl bg-primary hover:bg-accent transition ease-in-out duration-200'
               type='button'
               onClick={bookAppointment}
             >
