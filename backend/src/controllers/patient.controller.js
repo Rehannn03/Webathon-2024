@@ -136,9 +136,105 @@ const viewConsultations=asyncHandler(async(req,res)=>{
     )
 })
 
+const uploadReports=asyncHandler(async(req,res)=>{
+    const user=req.user.id
+    const {title,description,details}=req.body
+
+    const report=await Report.findOne({patientId:user})
+    const pdfPath=req.file?.path
+    const reportPdf=await uploadOnCloudinary(pdfPath)
+
+    if(!report){
+        const newReport=await Report.create({
+            patientId:user,
+            reports:[{
+                title,
+                description,
+                fileURL:reportPdf?.secure_url
+            }],
+            details
+        })
+
+        if(!newReport){
+            throw new ApiError(400,'Report not created')
+        }
+
+        return res
+        .status(201)
+        .json(
+            new ApiResponse(201,{
+                message:'Report created successfully',
+                newReport
+            })
+        ) 
+    }
+
+    const newReport=await Report.create({
+        patientId:user,
+        reports:[{
+            title,
+            description,
+            fileURL:reportPdf?.secure_url
+        }],
+        details
+    })
+
+    if(!newReport){
+        throw new ApiError(400,'Report not created')
+    }
+
+    return res
+    .status(201)
+    .json(
+        new ApiResponse(201,{
+            message:'Report created successfully',
+            newReport
+        })
+    )
+
+})
+
+const viewReports=asyncHandler(async(req,res)=>{
+    const user=req.user.id
+    const report=await Report.findOne({patientId:user})
+
+    if(!report){
+        throw new ApiError(404,'Report not found')
+    }
+
+    return res
+    .status(200)
+    .json(
+        new ApiResponse(200,{
+            report
+        })
+    )
+})
+
+const deleteReport=asyncHandler(async(req,res)=>{
+    const {reportId}=req.params
+
+    const report=await Report.findByIdAndDelete(reportId)
+
+    if(!report){
+        throw new ApiError(404,'Report not found')
+    }
+
+    return res
+    .status(200)
+    .json(
+        new ApiResponse(200,{
+            message:'Report deleted successfully'
+        })
+    )
+})
+
 export{
     scheduleAppointment,
     viewAppointments,
     addReports,
-    viewConsultations
+    viewConsultations,
+    uploadReports,
+    viewReports,
+    deleteReport
 }
