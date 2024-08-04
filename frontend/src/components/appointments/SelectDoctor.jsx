@@ -6,6 +6,7 @@ function SelectDoctor({ selectedDoctor, setSelectedDoctor }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [allDoctors, setAllDoctors] = useState([
     {
+      _id : '66a4e22133a7d912732d0748',
       pfp: "https://cdn.pfps.gg/pfps/3178-goofy-garfield.png",
       name: "Dr. Bingus",
       specialization: "Cardiology",
@@ -14,6 +15,7 @@ function SelectDoctor({ selectedDoctor, setSelectedDoctor }) {
       consultationFee: 100,
     },
     {
+      _id : '66a4e22133a7d912732d0748',
       pfp: "https://cdn.pfps.gg/pfps/3178-goofy-garfield.png",
       name: "Dr. Jone Doe",
       specialization: "Dermatology",
@@ -22,6 +24,7 @@ function SelectDoctor({ selectedDoctor, setSelectedDoctor }) {
       consultationFee: 80,
     },
     {
+      _id : '66a4e22133a7d912732d0748',
       pfp: "https://cdn.pfps.gg/pfps/3178-goofy-garfield.png",
       name: "Dr. Tyler Durden",
       specialization: "Dermatology",
@@ -30,6 +33,7 @@ function SelectDoctor({ selectedDoctor, setSelectedDoctor }) {
       consultationFee: 80,
     },
     {
+      _id : '66a4e22133a7d912732d0748',
       pfp: "https://cdn.pfps.gg/pfps/3178-goofy-garfield.png",
       name: "Dr. James Smith",
       specialization: "Cardiology",
@@ -38,6 +42,7 @@ function SelectDoctor({ selectedDoctor, setSelectedDoctor }) {
       consultationFee: 100,
     },
     {
+      _id : '66a4e22133a7d912732d0748',
       pfp: "https://cdn.pfps.gg/pfps/3178-goofy-garfield.png",
       name: "Dr. William Butcher",
       specialization: "Dermatology",
@@ -46,6 +51,7 @@ function SelectDoctor({ selectedDoctor, setSelectedDoctor }) {
       consultationFee: 80,
     },
     {
+      _id : '66a4e22133a7d912732d0748',
       pfp: "https://cdn.pfps.gg/pfps/3178-goofy-garfield.png",
       name: "Dr. Mark",
       specialization: "Dermatology",
