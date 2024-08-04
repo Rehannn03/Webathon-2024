@@ -14,8 +14,8 @@ const updateInfo=asyncHandler(async(req,res)=>{
 
     
     if(checkDoctor){
-        const doctor=await Doctor.findOneAndUpdate({
-            userId:user._id
+        const doctor=await Doctor.findByIdAndUpdate({
+            _id:user._id
         },
         {
             $set:{
