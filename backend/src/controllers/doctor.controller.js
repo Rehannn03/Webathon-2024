@@ -205,12 +205,35 @@ const fillConsultation=asyncHandler(async(req,res)=>{
     )
 })
 
+const getSpecialistCount=asyncHandler(async(req,res)=>{
+    const count=await Doctor.aggregate([
+        {
+            $group:{
+                _id:'$specialization',
+                count:{$sum:1}
+            }
+        }
+    ])
 
+    return res
+    .status(200)
+    .json(
+        new ApiResponse(200,{
+            count
+        })
+    )
+})
+
+// Appointment time slot with doctor bussiness 
+// Doctor specialisty wise grouping 
+// Appointment status is live 
+// Doctor consultations done plus how much money earned
 export {
     updateInfo,
     getDoctor,
     getAllDoctors,
     getAppointments,
     updateAppointment,
-    fillConsultation
+    fillConsultation,
+    getSpecialistCount
 }
