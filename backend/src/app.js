@@ -18,10 +18,11 @@ app.use(cors({
 import userRouter from './routes/user.routes.js';
 import doctorRouter from './routes/doctor.routes.js';
 import patientRouter from './routes/patient.routes.js';
+import adminRouter from './routes/admin.routes.js'
 app.use('/api/users',userRouter)
 app.use('/api/doctors',doctorRouter)
 app.use('/api/patients',patientRouter)
-
+app.use('/api/admin',adminRouter)
 app.get('/',(req,res)=>{
     res.send('API is running')
 })

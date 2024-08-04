@@ -26,7 +26,12 @@ const userSchema=new mongoose.Schema({
             contact:0,
             address:"",
             gender:"",
-            city:""
+            city:"",
+            existingDiseases:[],
+            allergies:[],
+            isDiabetic:false,
+            isPregnant:false,
+            isBP:false
         }
     },
     avatar:{
