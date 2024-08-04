@@ -15,7 +15,7 @@ function Appointment() {
       {id: 4, name: 'Orthopedic'},
       {id: 5, name: 'Neurology'},
     ])
-  const [allDoctors, setAllDoctors] = useState([])
+  
   const timeSlots = [
     {id: 1, slot: "Morning"},
     {id: 2, slot: "Afternoon"},

@@ -1,71 +1,35 @@
 import React, { useEffect, useState } from "react";
 import DoctorModal from "@/components/appointments/doctorModal";
 import Image from "next/image";
+import apiClient from "@/api-client/apiClient";
 
 function SelectDoctor({ selectedDoctor, setSelectedDoctor }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [allDoctors, setAllDoctors] = useState([
-    {
-      _id : '66a4e22133a7d912732d0748',
-      pfp: "https://cdn.pfps.gg/pfps/3178-goofy-garfield.png",
-      name: "Dr. Bingus",
-      specialization: "Cardiology",
-      experience: 10,
-      qualification: "MBBS, MD",
-      consultationFee: 100,
-    },
-    {
-      _id : '66a4e22133a7d912732d0748',
-      pfp: "https://cdn.pfps.gg/pfps/3178-goofy-garfield.png",
-      name: "Dr. Jone Doe",
-      specialization: "Dermatology",
-      experience: 8,
-      qualification: "MBBS, MD",
-      consultationFee: 80,
-    },
-    {
-      _id : '66a4e22133a7d912732d0748',
-      pfp: "https://cdn.pfps.gg/pfps/3178-goofy-garfield.png",
-      name: "Dr. Tyler Durden",
-      specialization: "Dermatology",
-      experience: 8,
-      qualification: "MBBS, MD",
-      consultationFee: 80,
-    },
-    {
-      _id : '66a4e22133a7d912732d0748',
-      pfp: "https://cdn.pfps.gg/pfps/3178-goofy-garfield.png",
-      name: "Dr. James Smith",
-      specialization: "Cardiology",
-      experience: 10,
-      qualification: "MBBS, MD",
-      consultationFee: 100,
-    },
-    {
-      _id : '66a4e22133a7d912732d0748',
-      pfp: "https://cdn.pfps.gg/pfps/3178-goofy-garfield.png",
-      name: "Dr. William Butcher",
-      specialization: "Dermatology",
-      experience: 8,
-      qualification: "MBBS, MD",
-      consultationFee: 80,
-    },
-    {
-      _id : '66a4e22133a7d912732d0748',
-      pfp: "https://cdn.pfps.gg/pfps/3178-goofy-garfield.png",
-      name: "Dr. Mark",
-      specialization: "Dermatology",
-      experience: 8,
-      qualification: "MBBS, MD",
-      consultationFee: 80,
-    },
-  ]);
+  const [allDoctors, setAllDoctors] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+
+  const getAllDoctors = async () => {
+    setLoading(true);
+    const response = await apiClient.get("/doctors/getAllDoctors");
+    if (response.status === 200) {
+      setAllDoctors(response.data.data.doctors);
+    } else {
+      toast({
+        title: "Error",
+        description: response.data.message,
+        variant: "destructive",
+      });
+    }
+    setLoading(false);
+  }
 
   useEffect(() => {
-    //  TODO: Fetch all doctors when modal is opened
-    // DEP ARRAY: isModalOpen
-    // Add loader while fetching data
-  }, []);
+    if (isModalOpen) {
+      getAllDoctors();
+    }
+
+  }, [isModalOpen]);
 
   const openModal = () => {
     setIsModalOpen(true);
@@ -90,6 +54,7 @@ function SelectDoctor({ selectedDoctor, setSelectedDoctor }) {
       </button>
       {isModalOpen && (
         <DoctorModal
+          loading={loading}
           doctors={allDoctors}
           onClose={closeModal}
           onSelectDoctor={handleDoctorSelect}
