@@ -7,9 +7,12 @@ import Consultation from "../model/consultation.model.js";
 const updateInfo=asyncHandler(async(req,res)=>{
     const user=req.user
 
+    
     const {specialization,experience,qualification,consultationFee}=req.body
 
-    const checkDoctor=await Doctor.findOne({userId:user._id})
+    const checkDoctor=await Doctor.findById(user._id)
+
+    
     if(checkDoctor){
         const doctor=await Doctor.findOneAndUpdate({
             userId:user._id
