@@ -41,14 +41,12 @@ export const InputTags = forwardRef<HTMLInputElement, InputTagsProps>(
             ref={ref}
             placeholder="Add Your Symptoms"
           />
-          <Button
-            type="button"
-            variant="secondary"
+          <button
             className="rounded-l-none border border-l-0"
             onClick={addPendingDataPoint}
           >
             Add
-          </Button>
+          </button>
         </div>
         {
           value.length === 0 ? (
@@ -56,7 +54,7 @@ export const InputTags = forwardRef<HTMLInputElement, InputTagsProps>(
           ) : (
             <div className="border rounded-md min-h-[2.5rem] overflow-y-auto p-2 flex gap-2 flex-wrap items-center">
               {value.map((item, idx) => (
-                <Badge key={idx} variant="secondary">
+                <Badge key={idx} variant="secondary" className={idx === 0 ? "rounded-tl-none" : idx === value.length - 1 ? "rounded-bl-none" : ""}>
                   {item}
                   <button
                     type="button"
