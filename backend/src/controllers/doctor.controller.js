@@ -81,7 +81,7 @@ const getDoctor=asyncHandler(async(req,res)=>{
 })
 
 const getAllDoctors=asyncHandler(asyncHandler(async(_,res)=>{
-    const doctors=await Doctor.find().select('-createdAt -updatedAt -__v').populate('userId','name email profile')
+    const doctors=await Doctor.find().select('-createdAt -updatedAt -__v').populate('userId','name avatar email profile')
     return res
     .status(200)
     .json(
@@ -123,11 +123,13 @@ const getAppointments=asyncHandler(async(req,res)=>{
                 status:1,
                 symptoms:1,
                 day:1,
+                note:1,
                 patient:{
                     _id:1,
                     name:1,
                     email:1,
-                    profile:1
+                    profile:1,
+                    avatar: 1
                 }
             }
         }
@@ -158,7 +160,8 @@ const updateAppointment=asyncHandler(async(req,res)=>{
     },
     {
         $set:{
-            status
+            status,
+            note
         }
     },
     {

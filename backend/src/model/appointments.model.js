@@ -21,7 +21,7 @@ const appointmentSchema=new Schema({
     },
     status:{
         type:String,
-        enum:['pending','approved','rejected'],
+        enum:['pending','approved','rejected', 'active', 'completed'],
         required:true,
         default:'pending'
     },
@@ -34,7 +34,8 @@ const appointmentSchema=new Schema({
         required:true
     },
     note:{
-        type:String
+        type:String,
+        default:''
     }
 },
 {timestamps:true})

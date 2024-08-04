@@ -97,7 +97,7 @@ const getUserProfile=asyncHandler(async(req,res)=>{
 })
 
 const updateProfile=asyncHandler(async(req,res)=>{
-    const {age,contact,address,gender,city}=req.body
+    const {age,contact,address,gender,city, existingDiseases, allergies, isDiabetic, isPregnant, isBP}=req.body
     const avatarPath=req.file?.path
     const avatar=await uploadOnCloudinary(avatarPath)
     const user=await User.findByIdAndUpdate(req.user._id,
@@ -108,7 +108,12 @@ const updateProfile=asyncHandler(async(req,res)=>{
                 contact,
                 address,
                 gender,
-                city
+                city,
+                existingDiseases,
+                allergies,
+                isDiabetic,
+                isPregnant,
+                isBP
             },
             avatar:avatar.secure_url
         }
