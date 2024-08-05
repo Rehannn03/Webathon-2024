@@ -1,3 +1,4 @@
+import Appointment from "../model/appointments.model.js";
 import Doctor from "../model/doctor.model.js";
 import { ApiError } from "../utils/apiError.js";
 import { ApiResponse } from "../utils/apiResponse.js";
@@ -31,6 +32,53 @@ const verifyDoctor = asyncHandler(async (req,res)=>{
     )
 })
 
+const getAllEarnings=asyncHandler(async(req,res)=>{
+    const appointments=Appointment.aggregate([
+        {
+            $match:{
+                status:'completed'
+            }
+        },
+        {
+            $lookup:{
+                from:'doctors',
+                localField:'doctorId',
+                foreignField:'_id',
+                as:'doctor'
+            }
+        },
+        {
+            $unwind:'$doctor'
+        },
+        {
+            $group:{
+                _id:'$doctorId',
+                totalAmount:{
+                    $sum:'$doctor.consultationFee'
+                }
+            }
+        }
+    ])
+
+    const totalPatientDiagnosied=(await appointments).length
+
+    const totalMoneyEarned=(await appointments).reduce((acc,curr)=>{
+        return acc+curr.totalAmount
+    },0)
+
+    return res
+    .status(200)
+    .json(
+        new ApiResponse(200,{
+            totalPatientDiagnosied,
+            totalMoneyEarned,
+            appointments:await appointments
+        })
+    )
+})
+
+
 export {
-    verifyDoctor
+    verifyDoctor,
+    getAllEarnings
 }

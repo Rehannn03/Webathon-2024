@@ -119,7 +119,6 @@ const addReports=asyncHandler(async(req,res)=>{
 
 const viewConsultations=asyncHandler(async(req,res)=>{
     const appointment=await Appointment.findOne({patientId:req.user._id})
-
     if(!appointment){
         throw new ApiError(404,'Appointment not found')
     }
