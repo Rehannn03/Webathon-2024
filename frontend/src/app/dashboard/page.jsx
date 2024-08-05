@@ -1,9 +1,14 @@
-import React from 'react'
-
-const page = () => {
+"use client";
+import React from "react";
+import PieChartUI from "@/components/Analytics/PieChartUI";
+import LineChartUI from "@/components/Analytics/LineChartUI";
+const Page = () => {
   return (
-    <div>page</div>
-  )
-}
+    <div className="h-screen">
+      <PieChartUI />
+      <LineChartUI />
+    </div>
+  );
+};
 
-export default page
+export default Page;
