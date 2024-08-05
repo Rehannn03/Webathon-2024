@@ -18,7 +18,7 @@ const doctorModal = ({ doctors, onClose, onSelectDoctor, loading }) => {
       <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
         <div className="bg-white rounded-xl p-6 w-[90%] md:w-2/3 mx-4 max-h-[90vh] overflow-y-auto shadow-lg">
           {
-            doctors.length === 0 ? <p className="text-center">No doctors available</p> :
+            doctors.length === 0 && !loading ? <p className="text-center">No doctors available</p> :
             loading ? <div className="block h-full m-auto">
                     <Image src='/loader.svg' height={40} width={40} alt="loader" className="block h-full m-auto" />
                     </div>

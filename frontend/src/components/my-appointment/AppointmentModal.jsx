@@ -288,10 +288,10 @@ const AppointmentModal = ({ appointment, onClose, getAllAppointment }) => {
                 placeholder="Add notes here..."
                 value={note}
                 onChange={(e) => setNote(e.target.value)}
-                disabled = {status === "approved" ? true : false}
+                disabled = {status === "pending" ? false : true}
               ></textarea>
             </div>
-        {status != "approved" && (
+        {status == "pending" && (
           <>
             
             <div className="flex justify-end mt-4 gap-4">

@@ -6,6 +6,8 @@ import { fetchAndSetUserStore } from '@/lib/fetchAndSetUserStore'
 import { useToast } from '@/components/ui/use-toast'
 import apiClient from '@/api-client/apiClient'
 import { useRouter } from 'next/navigation'; // Import the useRouter hook
+import Image from 'next/image'
+import loader from "/public/loader.svg";
 
 const formatDate = (date) => {
   return new Intl.DateTimeFormat('en-US', { dateStyle: 'full' }).format(new Date(date));
@@ -79,7 +81,7 @@ const AppointmentsList = () => {
           // Find the next upcoming appointment with status 'Accepted'
           let foundAcceptedAppt = null;
           for (const appt of sortedAppointments) {
-            if (new Date(appt.date) > new Date() && appt.status === 'accepted') {
+            if (new Date(appt.date) > new Date() && appt.status === 'approved') {
               foundAcceptedAppt = appt;
               break;
             }
@@ -125,12 +127,17 @@ const AppointmentsList = () => {
   return (
     <div className="min-h-screen p-6 bg-gray-100">
       <h1 className="text-3xl font-bold mb-6 text-center">Upcoming Appointments</h1>
+{
 
-      {loading && <p>Loading...</p>}
-
-      {nextUpcomingAppointment && (
-        <div className="mb-6 p-6 bg-blue-500 border border-black rounded-lg shadow-lg flex flex-col md:flex-row">
-          <div className="flex-1 mb-4 md:mb-0 w-full md:w-2/3 flex flex-col">
+      loading ? (
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                <Image src={loader} alt="Loading" width={50} height={50} />
+        </div>
+      ) :
+       <>
+        {nextUpcomingAppointment && (
+        <div className="mb-6 p-6 bg-primary border border-black rounded-lg shadow-lg flex flex-col md:flex-row">
+          <div className="mb-4 md:mb-0 w-full md:w-2/3 flex flex-col">
             <h2 className="text-2xl font-semibold mb-2 text-white">
               Your next upcoming appointment with {nextUpcomingAppointment.doctor.user.name}!
             </h2>
@@ -148,12 +155,14 @@ const AppointmentsList = () => {
               )}
             </ul>
           </div>
-          <div className="flex-1 flex flex-col md:flex-row items-center md:items-start">
+          <div className="flex flex-col md:flex-row items-center md:items-start">
             <div className="flex flex-col items-center md:items-start mb-4 md:mb-0 md:w-1/3">
-              <img
+              <Image
                 src={nextUpcomingAppointment.doctor.user.avatar}
                 alt={nextUpcomingAppointment.doctor.user.name}
                 className="w-16 h-16 rounded-full object-cover"
+                width={64}
+                height={64}
               />
               <div className="text-white text-center md:text-left">
                 <p className="text-lg font-medium">{nextUpcomingAppointment.doctor.user.name}</p>
@@ -182,7 +191,8 @@ const AppointmentsList = () => {
             </div>
           </div>
         </div>
-      )}
+      )
+      }
 
       <div className="space-y-4">
         {allAppointments.filter((appt) => appt !== nextUpcomingAppointment).map((appointment) => (
@@ -205,16 +215,26 @@ const AppointmentsList = () => {
                 className={`py-1 px-3 text-xs rounded-full ${
                   appointment.status === 'pending'
                     ? 'bg-yellow-200 text-yellow-600'
-                    : 'bg-green-200 text-green-600'
+                    : appointment.status === 'approved'
+                    ? 'bg-green-200 text-green-600'
+                    : appointment.status === 'rejected'
+                    ? 'bg-red-200 text-red-600'
+                    : appointment.status === 'active'
+                    ? 'bg-blue-200 text-blue-600'
+                    : appointment.status === 'completed'
+                    ? 'bg-purple-200 text-purple-600'
+                    : ''
                 }`}
               >
                 {appointment.status.charAt(0).toUpperCase() + appointment.status.slice(1)}
               </span>
             )}
             <div className="mt-4 flex items-center">
-              <img
+              <Image
                 src={appointment.doctor.user.avatar}
                 alt={appointment.doctor.user.name}
+                width={64}
+                height={64}
                 className="w-16 h-16 rounded-full object-cover mr-4"
               />
               <div>
@@ -228,6 +248,8 @@ const AppointmentsList = () => {
           </div>
         ))}
       </div>
+      </>
+    }
     </div>
   );
 };
