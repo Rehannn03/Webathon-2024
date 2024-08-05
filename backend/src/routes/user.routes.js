@@ -15,6 +15,6 @@ router.post('/register',registerUser)
 router.post('/login',loginUser)
 router.post('/logout',verifyJWT,logoutUser)
 router.get('/profile',verifyJWT,getUserProfile)
-router.patch('/profile',verifyJWT,upload.single('avatar') ,updateProfile)
+router.patch('/profile',verifyJWT,updateProfile)
 
 export default router;

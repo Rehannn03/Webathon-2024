@@ -115,7 +115,6 @@ const updateProfile=asyncHandler(async(req,res)=>{
                 isPregnant,
                 isBP
             },
-            avatar:avatar.secure_url
         }
     },
     {
