@@ -41,12 +41,14 @@ export const InputTags = forwardRef<HTMLInputElement, InputTagsProps>(
             ref={ref}
             placeholder="Add Your Symptoms"
           />
-          <button
+          <Button
             className="rounded-l-none border border-l-0"
             onClick={addPendingDataPoint}
+            type="button"
+            variant="secondary"
           >
             Add
-          </button>
+          </Button>
         </div>
         {
           value.length === 0 ? (
