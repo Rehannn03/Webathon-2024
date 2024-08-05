@@ -25,7 +25,7 @@ function SelectDoctor({ selectedDoctor, setSelectedDoctor }) {
   }
 
   useEffect(() => {
-    if (isModalOpen) {
+    if (isModalOpen && allDoctors.length === 0) {
       getAllDoctors();
     }
 
