@@ -125,7 +125,7 @@ const AppointmentsList = () => {
   };
 
   return (
-    <div className="min-h-screen p-6 bg-gray-100">
+    <div className="min-h-screen p-6">
       <h1 className="text-3xl font-bold mb-6 text-center">Upcoming Appointments</h1>
 {
 

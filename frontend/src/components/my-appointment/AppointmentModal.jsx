@@ -287,6 +287,7 @@ const AppointmentModal = ({ appointment, onClose, getAllAppointment }) => {
                 className="w-full p-2 border border-gray-200 rounded-lg hover:border-accent focus:border-primary focus:outline-none"
                 placeholder="Add notes here..."
                 value={note}
+                rows={5}
                 onChange={(e) => setNote(e.target.value)}
                 disabled = {status === "pending" ? false : true}
               ></textarea>

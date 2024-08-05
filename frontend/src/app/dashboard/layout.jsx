@@ -5,6 +5,7 @@ import {fetchAndSetUserStore} from '@/lib/fetchAndSetUserStore'
 import { useToast } from '@/components/ui/use-toast'
 import apiClient from '@/api-client/apiClient';
 import { useRouter } from 'next/navigation'
+import SideModal from '@/components/SideModal/SideModal'
 
 export default function DashboardLayout({ children }) {
     const { user, update } = useUserStore()
@@ -17,5 +18,13 @@ export default function DashboardLayout({ children }) {
         }
     }, [user])
     
-  return <section>{children}</section>
+  return <section>
+    <div className='grid grid-cols-1 md:grid-cols-4'> 
+    <SideModal />
+    <div className='col-span-3'>
+    {children}
+    </div>
+
+    </div>
+    </section>
 }
