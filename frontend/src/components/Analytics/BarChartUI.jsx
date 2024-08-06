@@ -3,7 +3,6 @@
 import { Bar, BarChart, CartesianGrid, XAxis } from "recharts";
 
 import {
-  ChartConfig,
   ChartContainer,
   ChartLegend,
   ChartLegendContent,
@@ -12,13 +11,18 @@ import {
 } from "@/components/ui/chart";
 
 const chartData = [
-  { day: "Monday", earnings: 186 },
-  { day: "Tuesday", earnings: 305 },
-  { day: "Wednesday", earnings: 237 },
-  { day: "Thursday", earnings: 73 },
-  { day: "Friday", earnings: 209 },
-  { day: "Saturday", earnings: 214 },
-  { day: "Sunday", earnings: 150 },
+  { month: "January", earnings: 186 },
+  { month: "February", earnings: 305 },
+  { month: "March", earnings: 237 },
+  { month: "April", earnings: 73 },
+  { month: "May", earnings: 209 },
+  { month: "June", earnings: 214 },
+  { month: "July", earnings: 150 },
+  { month: "August", earnings: 280 },
+  { month: "September", earnings: 195 },
+  { month: "October", earnings: 320 },
+  { month: "November", earnings: 250 },
+  { month: "December", earnings: 180 },
 ];
 
 const chartConfig = {
@@ -26,15 +30,15 @@ const chartConfig = {
     label: "Earnings in $",
     color: "#010101",
   },
-} satisfies ChartConfig;
-const WeekChartUI = () => {
+};
+const BarChartUI = () => {
   return (
     <div className="m-5 flex-1 p-8 border-2 w-[650px] h-[400px]">
       <ChartContainer config={chartConfig} className="w-full">
         <BarChart accessibilityLayer data={chartData}>
           <CartesianGrid vertical={false} />
           <XAxis
-            dataKey="day"
+            dataKey="month"
             tickLine={false}
             tickMargin={10}
             axisLine={false}
@@ -49,4 +53,4 @@ const WeekChartUI = () => {
   );
 };
 
-export default WeekChartUI;
+export default BarChartUI;

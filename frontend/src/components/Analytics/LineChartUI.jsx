@@ -3,13 +3,13 @@
 import { Line, LineChart, CartesianGrid, XAxis, YAxis } from "recharts";
 
 import {
-  ChartConfig,
   ChartContainer,
   ChartLegend,
   ChartLegendContent,
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart";
+
 
 const chartData = [
   {
@@ -120,7 +120,7 @@ const chartConfig = {
     label: "Earnings in $",
     color: "#030141",
   },
-} satisfies ChartConfig;
+}
 const LineChartUI = () => {
   return (
     <div className="m-5 flex-1 p-8 border-2 w-[650px] h-[400px]">
