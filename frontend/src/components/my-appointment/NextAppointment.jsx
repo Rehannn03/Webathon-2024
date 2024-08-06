@@ -72,6 +72,10 @@ function NextAppointment({ nextUpcomingAppointment }) {
   const handleConsultRedirect = async () => {
     try {
       console.log("Starting video consultation...");
+      if (nextUpcomingAppointment.link != "") {
+          window.open(nextUpcomingAppointment.link, "_blank");
+        return;
+      }
 
       // Generate a unique room ID and link
       const roomID = generateRoomID();
@@ -176,18 +180,18 @@ function NextAppointment({ nextUpcomingAppointment }) {
       </div>
 
       <div className="flex flex-row gap-3 items-center sm:items-end ">
-        {(isSameDay(new Date(nextUpcomingAppointment.date), today) &&
-          nextUpcomingAppointment.status === "approved") ||
-        nextUpcomingAppointment.status === "active" ? (
+        {/* {(isSameDay(new Date(nextUpcomingAppointment.date), today) &&
+        (  nextUpcomingAppointment.status === "approved") ||
+        nextUpcomingAppointment.status === "active") ? ( */}
           <button
             onClick={handleConsultRedirect}
             className="mt-4 md:mt-[200px] px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600"
           >
             Go to Consult
           </button>
-        ) : (
+        {/* ) : (
           <p className="text-white">The appointment day has passed.</p>
-        )}
+        )} */}
         {nextUpcomingAppointment.status === "active" && (
           <button className="mt-4 px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600">
             End Consultation
