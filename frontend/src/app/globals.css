@@ -63,3 +63,13 @@
 ::selection {
   background-color: hsl(213 10% 80%);
 }
+
+.fc-today-button::first-letter {
+  text-transform: uppercase;
+}
+.fc-daygrid-event-title {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  background-color: var(--primary) !important;
+}

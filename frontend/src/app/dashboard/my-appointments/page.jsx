@@ -24,6 +24,7 @@ function MyAppointments() {
 
   const getAllAppointment = async () => {
     if (!user) return;
+    if (allAppointments.length > 0) return;
     setLoading(true);
     try {
       const response = await apiClient.get("/doctors/getAppointments");
@@ -71,10 +72,11 @@ function MyAppointments() {
   };
 
   useEffect(() => {
-    if (user) {
+    if (user && !allAppointments.length > 0) {
       getAllAppointment();
     }
-  }, [user]);
+    console.log(allAppointments);
+  }, [user, allAppointments]);
 
   return (
     <div className="flex flex-col col-span-3 items-center justify-center mt-12">
