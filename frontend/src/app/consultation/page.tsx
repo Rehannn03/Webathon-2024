@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { v4 as uuid } from "uuid";
 import { SquareActivity } from "lucide-react";
+import Link from "next/link";
 
 export default function Home() {
   const { fullName, setFullName } = useConsult();
@@ -51,13 +52,13 @@ export default function Home() {
             className="border rounded-md focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 px-4 py-2 w-full text-gray-800 placeholder-gray-500 mt-4 md:mt-0"
             placeholder="Enter room ID to join a meeting"
           />
-          <button
+          <Link
+            rel="noopener noreferrer" target="_blank"
+            href="/room/[id]"
+            as={`/room/${roomID}`}
+            aria-placeholder="Join Meeting"
             className="rounded-md bg-blue-600 px-6 py-3 text-sm md:text-base font-medium text-white focus:outline-none hover:bg-blue-700 mt-4 md:mt-0"
-            onClick={() => router.push(`/room/${roomID}`)}
-            disabled={!roomID}
-          >
-            Join
-          </button>
+          />
         </div>
 
         {/* Create New Meeting Button */}
