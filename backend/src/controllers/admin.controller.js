@@ -32,7 +32,7 @@ const verifyDoctor = asyncHandler(async (req,res)=>{
     )
 })
 
-const getAllEarnings=asyncHandler(async(req,res)=>{
+const getAllEarnings=asyncHandler(async(_,res)=>{
     const appointments=Appointment.aggregate([
         {
             $match:{
