@@ -306,6 +306,11 @@ const earnings=asyncHandler(async(req,res)=>{
         }
     ])
 
+    const allAppointments=await Appointment
+        .find({
+            doctorId:checkVerify._id,
+        })
+
     const earnings=appointments.reduce((acc,appointment)=>{
         return acc+appointment.doctor.consultationFee
     },0)
@@ -314,7 +319,9 @@ const earnings=asyncHandler(async(req,res)=>{
     .status(200)
     .json(
         new ApiResponse(200,{
-            earnings
+            earnings,
+            completed:appointments.length,
+            total: allAppointments.length
         })
     )
 

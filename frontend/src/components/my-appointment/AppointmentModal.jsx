@@ -84,7 +84,6 @@ const AppointmentModal = ({ appointment, onClose, getAllAppointment }) => {
         variant: "success",
       });
       setAccept(true);
-      getAllAppointment();
     } else {
       toast({
         title: "Error",
@@ -92,6 +91,9 @@ const AppointmentModal = ({ appointment, onClose, getAllAppointment }) => {
         variant: "destructive",
       });
     }
+    getAllAppointment();
+    onClose();
+    
   };
 
   const onReject = async () => {
@@ -124,6 +126,7 @@ const AppointmentModal = ({ appointment, onClose, getAllAppointment }) => {
         variant: "destructive",
       });
     }
+    onClose();
   };
 
   return (
