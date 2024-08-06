@@ -77,11 +77,11 @@ function MyAppointments() {
   return (
     <>
   
-    <div className="flex flex-col items-center justify-center mt-12">
+    <div className="flex flex-col col-span-3 items-center justify-center mt-12">
         <h1 className="text-4xl font-semibold text-gray-700">My Appointments</h1>
       <div>
         {loading ? (
-            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+            <div className="flex items-center justify-center h-96">
                 <Image src={loader} alt="Loading" width={50} height={50} />
             </div>
         ) : (

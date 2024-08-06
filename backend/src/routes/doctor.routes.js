@@ -6,7 +6,8 @@ import {
     getAppointments,
     updateAppointment,
     fillConsultation,
-    getSpecialistCount
+    getSpecialistCount,
+    earnings
 } from '../controllers/doctor.controller.js';
 
 import { verifyJWT } from '../middleware/auth.middleware.js';
@@ -19,4 +20,5 @@ router.get('/getAppointments',verifyJWT,getAppointments)
 router.patch('/updateAppointment',verifyJWT,updateAppointment)
 router.post('/fillConsultation',verifyJWT,fillConsultation)
 router.get('/getSpecialistCount',verifyJWT,getSpecialistCount)
+router.get('/earnings',verifyJWT,earnings)
 export default router;

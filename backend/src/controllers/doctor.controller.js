@@ -185,7 +185,17 @@ const updateAppointment=asyncHandler(async(req,res)=>{
 const fillConsultation=asyncHandler(async(req,res)=>{
     const {appointmentId,diagnosis,prescription,followUp,symptoms}=req.body
     const checkVerify=await Doctor.findOne({userId:req.user._id})
-
+    const appointments=await Appointment.findByIdAndUpdate({
+        _id:appointmentId
+    },
+    {
+        $set:{
+            status:'completed'
+        }
+    },
+    {
+        new:true
+    }).select('-createdAt -updatedAt -__v -patientId -doctorId -date -time -day -symptoms -note')
     if(checkVerify.verified==false){
         throw new ApiError(403,'Doctor not verified')
     }
@@ -230,6 +240,54 @@ const getSpecialistCount=asyncHandler(async(req,res)=>{
     )
 })
 
+const earnings=asyncHandler(async(req,res)=>{
+    const checkVerify=await Doctor.findOne({userId:req.user._id})
+    if(checkVerify.verified==false){
+        throw new ApiError(403,'Doctor not verified')
+    }
+
+    const appointments=await Appointment.aggregate([
+        {
+            $match:{
+                doctorId:checkVerify._id,
+                status:'completed'
+            }
+        },
+        {
+            $lookup:{
+                from:'doctors',
+                localField:'doctorId',
+                foreignField:'_id',
+                as:'doctor'
+            }
+        },
+        {
+            $unwind:'$doctor'
+        },
+        {
+            $project:{
+                doctor:{
+                    specialization:1,
+                    consultationFee:1
+                }
+            }
+        }
+    ])
+
+    const earnings=appointments.reduce((acc,appointment)=>{
+        return acc+appointment.doctor.consultationFee
+    },0)
+
+    return res
+    .status(200)
+    .json(
+        new ApiResponse(200,{
+            earnings
+        })
+    )
+
+})
+
 // Appointment time slot with doctor bussiness 
 // Doctor specialisty wise grouping 
 // Appointment status is live 
@@ -241,5 +299,6 @@ export {
     getAppointments,
     updateAppointment,
     fillConsultation,
-    getSpecialistCount
+    getSpecialistCount,
+    earnings
 }

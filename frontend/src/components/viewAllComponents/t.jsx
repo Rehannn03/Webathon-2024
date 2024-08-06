@@ -8,6 +8,10 @@ import apiClient from '@/api-client/apiClient'
 import { useRouter } from 'next/navigation'; // Import the useRouter hook
 import Image from 'next/image'
 import loader from "/public/loader.svg";
+import {FaCalendarAlt} from 'react-icons/fa';
+import {FaClock} from 'react-icons/fa';
+import {FaNotesMedical} from 'react-icons/fa';
+
 
 const formatDate = (date) => {
   return new Intl.DateTimeFormat('en-US', { dateStyle: 'full' }).format(new Date(date));
@@ -124,6 +128,10 @@ const AppointmentsList = () => {
     router.push('/consult'); // Redirect to the consult page
   };
 
+  const doctor = nextUpcomingAppointment ? nextUpcomingAppointment.doctor : null;
+  const symptoms = nextUpcomingAppointment ? nextUpcomingAppointment.symptoms : [];
+
+
   return (
     <div className="min-h-screen p-6 bg-gray-100">
       <h1 className="text-3xl font-bold mb-6 text-center">Upcoming Appointments</h1>
@@ -136,41 +144,48 @@ const AppointmentsList = () => {
       ) :
        <>
         {nextUpcomingAppointment && (
-        <div className="mb-6 p-6 bg-primary border border-black rounded-lg shadow-lg flex flex-col md:flex-row">
-          <div className="mb-4 md:mb-0 w-full md:w-2/3 flex flex-col">
-            <h2 className="text-2xl font-semibold mb-2 text-white">
-              Your next upcoming appointment with {nextUpcomingAppointment.doctor.user.name}!
-            </h2>
-            <p className="text-lg text-white"><strong>Date:</strong> {formatDate(nextUpcomingAppointment.date)}</p>
-            <p className="text-lg text-white"><strong>Time:</strong> {nextUpcomingAppointment.time || 'Not specified'}</p>
-            <p className="text-lg text-white"><strong>Doctor's Note:</strong> {nextUpcomingAppointment.details || 'No additional notes provided.'}</p>
-            <p className="text-lg text-white"><strong>Symptoms:</strong></p>
-            <ul className="list-disc pl-6 text-white">
-              {nextUpcomingAppointment.symptoms && nextUpcomingAppointment.symptoms.length > 0 ? (
-                nextUpcomingAppointment.symptoms.map((symptom, index) => (
-                  <li key={index}>{symptom}</li>
-                ))
-              ) : (
-                <li>No symptoms provided</li>
-              )}
-            </ul>
-          </div>
-          <div className="flex flex-col md:flex-row items-center md:items-start">
-            <div className="flex flex-col items-center md:items-start mb-4 md:mb-0 md:w-1/3">
-              <Image
-                src={nextUpcomingAppointment.doctor.user.avatar}
-                alt={nextUpcomingAppointment.doctor.user.name}
-                className="w-16 h-16 rounded-full object-cover"
-                width={64}
-                height={64}
-              />
-              <div className="text-white text-center md:text-left">
-                <p className="text-lg font-medium">{nextUpcomingAppointment.doctor.user.name}</p>
-                <p>Specialization: {nextUpcomingAppointment.doctor.specialization}</p>
-                <p>Qualification: {nextUpcomingAppointment.doctor.qualification}</p>
-                <p>Experience: {nextUpcomingAppointment.doctor.experience} years</p>
-                <p>Fee: ${nextUpcomingAppointment.doctor.consultationFee}</p>
-              </div>
+          <div className="mb-6 p-6 bg-primary border border-black text-white rounded-lg shadow-lg">
+            <div className="flex flex-col md:flex-row justify-between items-center md:items-start">
+                <div className="flex-1 mb-4 md:mb-0">
+                    <h2 className="text-xl md:text-2xl font-bold mb-2">Your next upcoming appointment with Dr. {doctor.user.name}!</h2>  
+                    <div className="mb-2">
+                        <FaCalendarAlt className="inline mr-2" />
+                        <span className="font-semibold">Date:</span> {formatDate(nextUpcomingAppointment.date)}
+                    </div>
+                    <div className="mb-2">
+                        <FaClock className="inline mr-2" />
+                        <span className="font-semibold">Time:</span> {nextUpcomingAppointment.time || 'Not specified'}
+                    </div>
+                    <div className="mb-2">
+                        <FaNotesMedical className="inline mr-2" />
+                        <span className="font-semibold">Doctor's Note:</span> {nextUpcomingAppointment.note || 'No additional notes provided.'}
+                    </div>
+                    <div>
+                        <FaNotesMedical className="inline mr-2" />
+                        <span className="font-semibold">Symptoms:</span>
+                        <ul className="list-disc list-inside ml-6">
+                            {symptoms.map((symptom, index) => (
+                                <li key={index}>{symptom}</li>
+                            ))}
+                        </ul>
+                    </div>
+                </div>
+                <div className="flex-1 md:ml-6 flex flex-col items-center md:items-end text-center md:text-right">
+                    <Image
+                        src={doctor.user.avatar}
+                        alt={doctor.user.name}
+                        width={96}
+                        height={96}
+                        className="w-24 h-24 md:w-32 md:h-32 rounded-full object-cover mb-4"
+                    />
+                    <div>
+                        <h3 className="text-lg md:text-xl font-semibold">{doctor.name}</h3>
+                        <p>Specialization: {doctor.specialization}</p>
+                        <p>Qualification: {doctor.qualification}</p>
+                        <p>Experience: {doctor.experience} years</p>
+                        <p>Fee: ${doctor.consultationFee}</p>
+                    </div>
+                </div>
             </div>
             <div className="flex flex-col items-center md:items-end ml-auto md:ml-6">
               {timer !== null ? (
@@ -189,8 +204,8 @@ const AppointmentsList = () => {
                 <p className="text-white">The appointment time has passed.</p>
               )}
             </div>
-          </div>
         </div>
+
       )
       }
 
