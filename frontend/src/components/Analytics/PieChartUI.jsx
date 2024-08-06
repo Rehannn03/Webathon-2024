@@ -28,9 +28,9 @@ class PieChartUI extends PureComponent {
 
   render() {
     return (
-      <div className='h-screen'>
+      <div className='h-[600px] w-[600px] flex-1'>
         <ResponsiveContainer>
-        <PieChart width={500} height={500}>
+        <PieChart>
           <Pie
             data={data}
             cx="50%"
