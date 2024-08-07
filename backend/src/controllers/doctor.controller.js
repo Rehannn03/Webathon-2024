@@ -8,10 +8,19 @@ import uploadOnCloudinary from '../utils/cloudinary.js'
 import User from "../model/user.model.js";
 const updateInfo=asyncHandler(async(req,res)=>{
     const user=req.user
-
+    const degreePath=req.files?.path
+    let degreeUrl=""
+    console.log(degreePath)
+    
+    if(degreePath){
+        const result=await uploadOnCloudinary(degreePath)
+        console.log(result);
+        
+        degreeUrl=result.secure_url
+    }
     
     const {specialization,experience,qualification,consultationFee}=req.body
-
+    console.log(req.body)
     const checkDoctor=await Doctor.findById(user._id)
 
     
@@ -24,7 +33,8 @@ const updateInfo=asyncHandler(async(req,res)=>{
                 specialization,
                 experience,
                 qualification,
-                consultationFee
+                consultationFee,
+                degree:degreeUrl
             }
         },
         {
@@ -50,7 +60,8 @@ const updateInfo=asyncHandler(async(req,res)=>{
         specialization,
         experience,
         qualification,
-        consultationFee
+        consultationFee,
+        degree:degreeUrl
     })
 
     if(!doctor){

@@ -36,6 +36,10 @@ const doctorSchema=new Schema({
         type:Boolean,
         required:true,
         default:false
+    },
+    degree:{
+        type:String,
+        required:true
     }
 },{timestamps:true})
 
