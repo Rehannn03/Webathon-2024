@@ -120,13 +120,61 @@ const addReports=asyncHandler(async(req,res)=>{
 })
 
 const viewConsultations=asyncHandler(async(req,res)=>{
-    const appointment=await Appointment.findOne({patientId:req.user._id})
-    if(!appointment){
-        throw new ApiError(404,'Appointment not found')
-    }
-
-    const consultation=await Consultation.findOne({appointmentId:appointment._id}).select('-appointmentId -_id -createdAt -updatedAt -__v')
-
+    const consultation = await Appointment.aggregate([
+        {
+            $match:{
+                patientId:req.user._id
+            }
+        },
+        {
+            $lookup:{
+                from:'consultations',
+                localField:'_id',
+                foreignField:'appointmentId',
+                as:'consultation'
+            }
+        },
+        {
+            $unwind:'$consultation'
+        },
+        {
+            $lookup:{
+                from:'doctors',
+                localField:'doctorId',
+                foreignField:'_id',
+                as:'doctor'
+            }
+        },
+        {
+            $unwind:'$doctor'
+        },
+        {
+            $lookup:{
+                from:'users',
+                localField:'doctor.userId',
+                foreignField:'_id',
+                as:'doctor.user'
+            }
+        },
+        {
+            $unwind:'$doctor.user'
+        },
+        {
+            $project:{
+                symptoms:1,
+                note:1,
+                'doctor.user.name':1,
+                'doctor.user.avatar':1,
+                'doctor.specialization':1,
+                'doctor.consultationFee':1,
+                'consultation.diagnosis':1,
+                'consultation.prescription':1,
+                'consultation.createdAt':1,
+                'consultation.followUp':1
+            }       
+        }
+    ])
+    console.log(consultation);
 
     return res
     .status(200)
