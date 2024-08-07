@@ -1,22 +1,25 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useUserStore } from "@/stores/store";
 import { fetchAndSetUserStore } from "@/lib/fetchAndSetUserStore";
-import { useToast } from "@/components/ui/use-toast";
-import apiClient from "@/api-client/apiClient";
 import { useRouter } from "next/navigation";
 import SideModal from "@/components/SideModal/SideModal";
 
 export default function DashboardLayout({ children }) {
   const { user, update } = useUserStore();
   const router = useRouter();
+
   useEffect(() => {
     if (!user) {
       fetchAndSetUserStore(update);
     } else if (user.role !== "doctor" && user.role !== "admin") {
       router.push("/404");
-    }
-  }, [user]);
+    } 
+  // TODO: Uncomment the following code to enable verification
+    // else if (user.role === "doctor" && !user.verified) {
+    //   router.push("/verify-doctor");
+    // }
+  }, [user, update, router]);
 
   return (
     <section>
