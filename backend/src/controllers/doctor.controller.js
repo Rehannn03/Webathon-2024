@@ -82,16 +82,6 @@ const getDoctor=asyncHandler(async(req,res)=>{
     )
 })
 
-const getAllDoctors=asyncHandler(asyncHandler(async(_,res)=>{
-    const doctors=await Doctor.find().select('-createdAt -updatedAt -__v').populate('userId','name avatar email profile')
-    return res
-    .status(200)
-    .json(
-        new ApiResponse(200,{
-            doctors
-        })
-    )
-}))
 
 const getAppointments=asyncHandler(async(req,res)=>{
     const checkVerify=await Doctor.findOne({userId:req.user._id})
@@ -335,7 +325,6 @@ const earnings=asyncHandler(async(req,res)=>{
 export {
     updateInfo,
     getDoctor,
-    getAllDoctors,
     getAppointments,
     updateAppointment,
     fillConsultation,

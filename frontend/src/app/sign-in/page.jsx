@@ -17,12 +17,12 @@ import { useRouter } from "next/navigation";
 import { useToast } from "@/components/ui/use-toast";
 import { signInSchema } from "@/schemas/signInSchema";
 import apiClient from "@/api-client/apiClient";
-import axios from "axios";
 import { useUserStore } from "@/stores/store";
 
 export default function SignInForm() {
   const router = useRouter();
-  const { user, update } = useUserStore();
+  const { update } = useUserStore();
+  const { toast } = useToast();
 
   const form = useForm({
     resolver: zodResolver(signInSchema),
@@ -32,11 +32,9 @@ export default function SignInForm() {
     },
   });
 
-  const { toast } = useToast();
   const onSubmit = async (data) => {
-    console.log(data); //TODO: Remove this line
+    console.log(data); // TODO: Remove this line
     try {
-      //TODO: Add the API endpoint for sign-in\
       const bodyData = {
         email: data.identifier,
         password: data.password,
@@ -46,11 +44,21 @@ export default function SignInForm() {
         title: "Success",
         description: response.data.message,
       });
+      
       const userData = await apiClient.get("/users/profile");
       const user = userData.data.data.user;
       update(user);
 
-      router.replace("/appointment");
+      if (user.profile.age == 0) {
+        toast({
+          title: "Incomplete Profile",
+          description: "Please fill in your details first.",
+          variant: "destructive",
+        });
+        router.replace("/profile");
+      } else {
+        router.replace("/appointment");
+      }
     } catch (error) {
       const axiosError = error;
       let errorMessage = axiosError.response?.data.message;
@@ -61,38 +69,12 @@ export default function SignInForm() {
       });
     }
   };
-  //     const result = await signIn('credentials', {
-  //       redirect: false,
-  //       identifier: data.identifier,
-  //       password: data.password,
-  //     });
-
-  //     if (result?.error) {
-  //       if (result.error === 'CredentialsSignin') {
-  //         toast({
-  //           title: 'Login Failed',
-  //           description: 'Incorrect username or password',
-  //           variant: 'destructive',
-  //         });
-  //       } else {
-  //         toast({
-  //           title: 'Error',
-  //           description: result.error,
-  //           variant: 'destructive',
-  //         });
-  //       }
-  //     }
-
-  //     if (result?.url) {
-  //       router.replace('/dashboard');
-  //     }
-  //   };
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-800">
       <div className="w-full max-w-md p-8 space-y-8 bg-white rounded-lg shadow-md">
         <div className="text-center">
-          //TODO: Add the website name
+          {/* TODO: Add the website name */}
           <h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl mb-6">
             Welcome Back to Website Name
           </h1>
