@@ -44,12 +44,12 @@ export default function SignInForm() {
         title: "Success",
         description: response.data.message,
       });
-      
+
       const userData = await apiClient.get("/users/profile");
       const user = userData.data.data.user;
       update(user);
 
-      if (user.profile.age == 0) {
+      if (user.profile.age === 0) {
         toast({
           title: "Incomplete Profile",
           description: "Please fill in your details first.",
@@ -57,7 +57,17 @@ export default function SignInForm() {
         });
         router.replace("/profile");
       } else {
-        router.replace("/appointment");
+        if (user.role === 'admin' || user.role === 'doctor') {
+          router.replace("/dashboard");
+        } else if (user.role === 'patient') {
+          router.replace("/my-appointments");
+        } else {
+          toast({
+            title: "Unexpected Role",
+            description: "Your user role is not recognized.",
+            variant: "destructive",
+          });
+        }
       }
     } catch (error) {
       const axiosError = error;

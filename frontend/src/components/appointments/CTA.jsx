@@ -34,6 +34,7 @@ function CTA() {
                   <button
                     class="inline-flex items-center justify-center py-4 px-6 w-full text-white font-medium border border-white border-opacity-20 hover:border-opacity-40 rounded-xl focus:ring focus:ring-white focus:ring-opacity-40 bg-transparent hover:bg-black hover:bg-opacity-5 transition ease-in-out duration-200"
                     type="button"
+                    
                   >
                     <svg
                       class="mr-2.5"
@@ -51,7 +52,7 @@ function CTA() {
                         strokeLinejoin="round"
                       ></path>
                     </svg>
-                    <span>Book A Free Appointment</span>
+                    <a href="/appointment">Book A Free Appointment</a>
                   </button>
                 </div>
               </div>

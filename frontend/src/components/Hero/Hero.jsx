@@ -9,104 +9,6 @@ const Hero = () => {
 
   return (
     <>
-      <div
-        data-section-id="7"
-        data-share="custom-155382"
-        data-category="numbers-gray-mix"
-        data-component-id="f95f4658_01_awz"
-        data-custom-component-id="155382"
-        className="bg-white"
-      >
-        <div className="wave-top w-full text-gray-50">
-          <svg
-            viewBox="0 0 1440 116"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            data-config-id="svg-inline1"
-          >
-            <path
-              d="M1440 64.5909H1090.08C833.336 64.5909 580.229 -7.62939e-06 360 -7.62939e-06C139.771 -7.62939e-06 0 64.5909 0 64.5909V116H1440V64.5909Z"
-              fill="currentColor"
-            ></path>
-          </svg>
-        </div>
-        <section className="py-20 xl:py-24 bg-gray-50">
-          <div className="container px-4 mx-auto">
-            <div className="flex flex-wrap justify-center text-center -mx-4">
-              <div className="w-full md:w-1/3 lg:w-1/4 px-4 mb-8 lg:mb-0">
-                <h2
-                  className="mb-2 text-4xl md:text-5xl font-bold text-gray-900 tracking-tighter"
-                  data-config-id="text3"
-                >
-                  10 000
-                </h2>
-                <p
-                  className="text-lg md:text-xl text-gray-500 font-medium"
-                  data-config-id="text7"
-                >
-                  Patients treated
-                </p>
-              </div>
-              <div className="w-full md:w-1/3 lg:w-1/4 px-4 mb-8 lg:mb-0">
-                <h2
-                  className="mb-2 font-bold text-4xl md:text-5xl text-gray-900 tracking-tighter"
-                  data-config-id="text4"
-                >
-                  89%
-                </h2>
-                <p
-                  className="text-lg md:text-xl text-gray-500 font-medium"
-                  data-config-id="text8"
-                >
-                  Success rate
-                </p>
-              </div>
-              <div className="w-full md:w-1/3 lg:w-1/4 px-4 mb-8 lg:mb-0">
-                <h2
-                  className="mb-2 font-bold text-4xl md:text-5xl text-gray-900 tracking-tighter"
-                  data-config-id="text5"
-                >
-                  30
-                </h2>
-                <p
-                  className="text-lg md:text-xl text-gray-500 font-medium"
-                  data-config-id="text9"
-                >
-                  Doctors
-                </p>
-              </div>
-              <div className="w-full md:w-1/3 lg:w-1/4 px-4">
-                <h2
-                  className="mb-2 font-bold text-4xl md:text-5xl text-gray-900 tracking-tighter"
-                  data-config-id="text6"
-                >
-                  6
-                </h2>
-                <p
-                  className="text-lg md:text-xl text-gray-500 font-medium"
-                  data-config-id="text10"
-                >
-                  Types of treatment
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
-        <div className="wave-bottom w-full text-gray-50">
-          <svg
-            viewBox="0 0 1440 116"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            data-config-id="svg-inline2"
-          >
-            <path
-              d="M0 51.4091H349.922C606.664 51.4091 859.771 116 1080 116C1300.23 116 1440 51.4091 1440 51.4091V0H0V51.4091Z"
-              fill="currentColor"
-            ></path>
-          </svg>
-        </div>
-      </div>
-
       <section
         data-section-id="2"
         data-share="custom-155380"
@@ -136,7 +38,7 @@ const Hero = () => {
             </div>
           </div>
         </div>
-        <div className="py-20 md:py-28 bg-gray-500">
+        <div className="py-20 md:py-28 bg-slate-900">
           <div className="container px-4 mx-auto">
             <div className="flex flex-wrap xl:items-center -mx-4">
               <div className="w-full md:w-1/2 px-4 mb-16 md:mb-0">
@@ -157,16 +59,16 @@ const Hero = () => {
                   <div className="w-full md:w-auto py-1 md:py-0 md:mr-4">
                     <a
                       className="inline-block py-5 px-7 w-full text-base md:text-lg leading-4 text-blue-50 font-medium text-center bg-blue-500 hover:bg-blue-600 focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 rounded-md shadow-sm"
-                      href="#"
+                      href="/pricing"
                       data-config-id="text24"
                     >
-                      +44 0808 239 1352
+                      View Pricing
                     </a>
                   </div>
                   <div className="w-full md:w-auto py-1 md:py-0">
                     <a
                       className="inline-block py-5 px-7 w-full text-base md:text-lg leading-4 text-gray-100 font-medium text-center bg-gray-700 hover:bg-gray-800 focus:ring-2 focus:ring-gray-700 focus:ring-opacity-50 rounded-md shadow-sm"
-                      href="#"
+                      href="/appointment"
                       data-config-id="text25"
                     >
                       Book an appointment
@@ -212,7 +114,7 @@ const Hero = () => {
         data-custom-component-id="155382"
         class="bg-white"
       >
-        <div class="wave-top w-full text-gray-50">
+        <div class="wave-top w-full text-gray-600 ">
           <svg
             viewBox="0 0 1440 116"
             fill="none"
@@ -225,18 +127,18 @@ const Hero = () => {
             ></path>
           </svg>
         </div>
-        <section class="py-20 xl:py-24 bg-gray-50">
+        <section class="py-20 xl:py-24 bg-gray-600">
           <div class="container px-4 mx-auto">
             <div class="flex flex-wrap justify-center text-center -mx-4">
               <div class="w-full md:w-1/3 lg:w-1/4 px-4 mb-8 lg:mb-0">
                 <h2
-                  class="mb-2 text-4xl md:text-5xl font-bold text-gray-900 tracking-tighter"
+                  class="mb-2 text-4xl md:text-5xl font-extrabold text-gray-900 tracking-tighter"
                   data-config-id="text3"
                 >
                   10 000
                 </h2>
                 <p
-                  class="text-lg md:text-xl text-gray-500 font-medium"
+                  class="text-lg md:text-xl text-white font-sans font-medium"
                   data-config-id="text7"
                 >
                   Patients treated
@@ -244,13 +146,13 @@ const Hero = () => {
               </div>
               <div class="w-full md:w-1/3 lg:w-1/4 px-4 mb-8 lg:mb-0">
                 <h2
-                  class="mb-2 font-bold text-4xl md:text-5xl text-gray-900 tracking-tighter"
+                  class="mb-2 font-extrabold text-4xl md:text-5xl text-gray-900 tracking-tighter"
                   data-config-id="text4"
                 >
                   89%
                 </h2>
                 <p
-                  class="text-lg md:text-xl text-gray-500 font-medium"
+                  class="text-lg md:text-xl text-white font-medium font-sans"
                   data-config-id="text8"
                 >
                   Sucess rate
@@ -258,13 +160,13 @@ const Hero = () => {
               </div>
               <div class="w-full md:w-1/3 lg:w-1/4 px-4 mb-8 lg:mb-0">
                 <h2
-                  class="mb-2 font-bold text-4xl md:text-5xl text-gray-900 tracking-tighter"
+                  class="mb-2 font-extrabold  text-4xl md:text-5xl text-gray-900 tracking-tighter"
                   data-config-id="text5"
                 >
                   30
                 </h2>
                 <p
-                  class="text-lg md:text-xl text-gray-500 font-medium"
+                  class="text-lg md:text-xl text-white font-medium"
                   data-config-id="text9"
                 >
                   Doctors
@@ -272,13 +174,13 @@ const Hero = () => {
               </div>
               <div class="w-full md:w-1/3 lg:w-1/4 px-4">
                 <h2
-                  class="mb-2 font-bold text-4xl md:text-5xl text-gray-900 tracking-tighter"
+                  class="mb-2 font-extrabold text-4xl md:text-5xl text-gray-900 tracking-tighter"
                   data-config-id="text6"
                 >
                   6
                 </h2>
                 <p
-                  class="text-lg md:text-xl text-gray-500 font-medium"
+                  class="text-lg md:text-xl text-white font-medium"
                   data-config-id="text10"
                 >
                   Types of treatment
@@ -287,7 +189,7 @@ const Hero = () => {
             </div>
           </div>
         </section>
-        <div class="wave-bottom w-full text-gray-50">
+        <div class="wave-bottom w-full text-gray-600">
           <svg
             viewBox="0 0 1440 116"
             fill="none"
