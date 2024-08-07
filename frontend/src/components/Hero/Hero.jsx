@@ -175,26 +175,11 @@ const Hero = () => {
                 </div>
               </div>
               <div className="w-full md:w-1/2 px-4">
-                <div className="relative mx-auto md:mr-0 max-w-max">
+                <div className="relative flex mx-auto md:mr-0 max-w-max">
                   <Image
-                    width={100}
-                    height={100}
-                    className="absolute z-10 -left-8 -top-8 w-28 md:w-auto text-yellow-400"
-                    src="flex-ui-assets/elements/circle3-violet.svg"
-                    alt=""
-                    data-config-id="image3"
-                  />
-                  <Image
-                    width={100}
-                    height={100}
-                    className="absolute z-10 -right-7 -bottom-8 w-28 md:w-auto text-blue-500"
-                    src="flex-ui-assets/elements/dots3-red.svg"
-                    alt=""
-                    data-config-id="image4"
-                  />
-                  <Image
-                    width={100}
-                    height={100}
+                    width={450}
+                    height={450}
+                    // fill="cover"
                     className="relative rounded-7xl"
                     src="https://static.shuffle.dev/uploads/files/d8/d8ed2c049579f9e8c93c7a7d085009aaa5d5b3b2/pexels-evg-kowalievska-1170979.jpg"
                     alt=""
@@ -349,26 +334,10 @@ const Hero = () => {
               the best treatment possible.{" "}
             </p>
           </div>
-          <div class="relative mb-8 md:mb-24 mx-auto max-w-max">
+          <div class="relative h-full flex items-center justify-center mb-8 md:mb-24 mx-auto">
             <Image
-              width={100}
-              height={100}
-              class="absolute z-10 -left-8 -top-8 w-28 md:w-auto text-yellow-400"
-              src="flex-ui-assets/elements/circle3-violet.svg"
-              alt=""
-              data-config-id="image1"
-            />
-            <Image
-              width={100}
-              height={100}
-              class="absolute z-10 -right-7 -bottom-8 w-28 md:w-auto text-blue-500"
-              src="flex-ui-assets/elements/dots3-red.svg"
-              alt=""
-              data-config-id="image2"
-            />
-            <Image
-              width={100}
-              height={100}
+              width={400}
+              height={400}
               src="https://static.shuffle.dev/uploads/files/d8/d8ed2c049579f9e8c93c7a7d085009aaa5d5b3b2/pexels-shvets-production-6975474-1.jpg"
               alt=""
               data-config-id="image3"
@@ -520,26 +489,10 @@ const Hero = () => {
                 Book appointment
               </a>
             </div>
-            <div class="relative max-w-4xl mx-auto">
+            <div class="relative flex justify-center max-w-4xl mx-auto">
               <Image
-                width={100}
-                height={100}
-                class="absolute top-0 left-0 -mt-6 lg:-mt-12 -ml-6 lg:-ml-12 w-20 lg:w-auto z-10"
-                src="flex-ui-assets/elements/circle3-violet.svg"
-                alt=""
-                data-config-id="image1"
-              />
-              <Image
-                width={100}
-                height={100}
-                class="absolute bottom-0 right-0 -mb-6 lg:-mb-10-mr-6 lg:-mr-12 w-20 lg:w-auto"
-                src="flex-ui-assets/elements/dots3-red.svg"
-                alt=""
-                data-config-id="image2"
-              />
-              <Image
-                width={100}
-                height={100}
+                width={450}
+                height={450}
                 class="relative"
                 src="https://static.shuffle.dev/uploads/files/d8/d8ed2c049579f9e8c93c7a7d085009aaa5d5b3b2/towfiqu-barbhuiya-blgvpvlTGIw-unsplash.jpg"
                 alt=""
