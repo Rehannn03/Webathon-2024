@@ -70,6 +70,7 @@ const viewAppointments=asyncHandler(async(req,res)=>{
                 day:1,
                 symptoms:1,
                 note:1,
+                link: 1,
                 'doctor.user.name':1,
                 'doctor.user.avatar':1,
                 'doctor.specialization':1,
