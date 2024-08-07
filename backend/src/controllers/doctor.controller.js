@@ -116,6 +116,7 @@ const getAppointments=asyncHandler(async(req,res)=>{
                 symptoms:1,
                 day:1,
                 note:1,
+                link: 1,
                 patient:{
                     _id:1,
                     name:1,

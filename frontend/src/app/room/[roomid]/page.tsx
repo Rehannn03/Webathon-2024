@@ -1,12 +1,14 @@
 "use client";
 
-import useConsult from "@/stores/useConsult";
+// import useConsult from "@/stores/useConsult";
 import { ZegoUIKitPrebuilt } from "@zegocloud/zego-uikit-prebuilt";
 import React from "react";
 import { v4 as uuid } from "uuid";
+import { useUserStore } from "@/stores/store";
 
 const Room = ({ params }: { params: { roomid: string } }) => {
-  const { fullName } = useConsult();
+  // const { fullName } = useConsult();
+  const { user } = useUserStore();
   const roomID = params.roomid;
 
   let myMeeting: any = async (element: any) => {
@@ -19,7 +21,7 @@ const Room = ({ params }: { params: { roomid: string } }) => {
       serverSecret,
       roomID,
       uuid(),
-      fullName || "user" + Date.now(),
+      user.name || "user" + Date.now(),
       720
     );
 
