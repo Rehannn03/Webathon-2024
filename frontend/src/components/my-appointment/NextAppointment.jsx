@@ -5,8 +5,9 @@ import { v4 as uuid } from "uuid";
 import { useUserStore } from "@/stores/store";
 import { fetchAndSetUserStore } from "@/lib/fetchAndSetUserStore";
 import apiClient from "@/api-client/apiClient";
+import ConsultationModal from "@/components/my-appointment/ConsultationModal";
 
-function NextAppointment({ nextUpcomingAppointment }) {
+function NextAppointment({ nextUpcomingAppointment, getAllAppointments }) {
   const [timer, setTimer] = useState(null);
   const router = useRouter();
   const today = new Date();
@@ -33,6 +34,12 @@ function NextAppointment({ nextUpcomingAppointment }) {
 
     return `${days} days ${hours}h ${minutes}m ${seconds}s`;
   };
+
+  const [isOpen, setIsOpen] = useState(false);
+  const toggleModal = () => {
+    setIsOpen(!isOpen);
+  };
+
 
   useEffect(() => {
     if (nextUpcomingAppointment) {
@@ -193,11 +200,23 @@ function NextAppointment({ nextUpcomingAppointment }) {
           <p className="text-white">The appointment day has passed.</p>
         )} */}
         {nextUpcomingAppointment.status === "active" && (
-          <button className="mt-4 px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600">
+          <button className="mt-4 px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600"
+            onClick={toggleModal}
+          >
             End Consultation
           </button>
         )}
       </div>
+      {
+        isOpen && (
+          <ConsultationModal
+            isOpen={isOpen}
+            toggleModal={toggleModal}
+            doctor={user}
+            appointment={nextUpcomingAppointment}
+            getAllAppointments={getAllAppointments}
+          />  )
+      }
     </div>
   );
 }

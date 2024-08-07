@@ -91,6 +91,7 @@ function MyAppointments() {
             {nextUpcomingAppointment && (
               <NextAppointment
                 nextUpcomingAppointment={nextUpcomingAppointment}
+                getAllAppointment={getAllAppointment}
               />
             )}
 

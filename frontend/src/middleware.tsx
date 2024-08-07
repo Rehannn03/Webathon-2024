@@ -14,14 +14,13 @@ export function middleware(request: NextRequest) {
     if(tokenCookie && 
         (
             url.pathname.startsWith('/sign-in') ||
-            url.pathname.startsWith('/sign-up') ||
-            url.pathname.startsWith('/consultation')
+            url.pathname.startsWith('/sign-up') 
     )){
-        return NextResponse.redirect(new URL('/dashboard', request.url))
+        return NextResponse.redirect(new URL('/', request.url))
     }
-    // if (!tokenCookie && url.pathname.startsWith('/dashboard')) {
-    //     return NextResponse.redirect(new URL('/sign-in', request.url))
-    // }
+    if (!tokenCookie && (url.pathname.startsWith('/') && url.pathname !== '/sign-in' && url.pathname !== '/sign-up' && url.pathname !== '/')){  
+        return NextResponse.redirect(new URL('/sign-in', request.url))
+    }
   
 }
  

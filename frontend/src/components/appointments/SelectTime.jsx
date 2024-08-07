@@ -1,30 +1,7 @@
 import React from "react";
-import { BsCloudSunFill, BsFillSunFill, BsSun } from "react-icons/bs";
-import { IoCloudyNight } from "react-icons/io5";
 
-function SelectTime({ timeSlots, selectedTime, setSelectedTime }) {
-  const timeOptions = [
-    {
-      icon: BsCloudSunFill,
-      time: "9-12PM",
-      name: "Morning",
-    },
-    {
-      icon: BsFillSunFill,
-      time: "12-3PM",
-      name: "Afternoon",
-    },
-    {
-      icon: BsSun,
-      time: "3-6PM",
-      name: "Evening",
-    },
-    {
-      icon: IoCloudyNight,
-      time: "6-9PM",
-      name: "Night",
-    },
-  ];
+function SelectTime({ timeOptions, selectedTime, setSelectedTime }) {
+
   return (
     <div className="flex flex-col">
         <p className="text-sm font-semibold"> Select A Time Slot</p>

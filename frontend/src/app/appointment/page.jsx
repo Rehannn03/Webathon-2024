@@ -5,6 +5,8 @@ import { useUserStore } from '@/stores/store'
 import {fetchAndSetUserStore} from '@/lib/fetchAndSetUserStore'
 import { useToast } from '@/components/ui/use-toast'
 import apiClient from '@/api-client/apiClient';
+import { BsCloudSunFill, BsFillSunFill, BsSun } from "react-icons/bs";
+import { IoCloudyNight } from "react-icons/io5"
 
 function Appointment() {
   const { user, update } = useUserStore() 
@@ -16,12 +18,28 @@ function Appointment() {
       {id: 5, name: 'Neurology'},
     ])
   
-  const timeSlots = [
-    {id: 1, slot: "Morning"},
-    {id: 2, slot: "Afternoon"},
-    {id: 3, slot: "Evening"},
-    {id: 4, slot: "Night"},
-  ]
+    const timeOptions = [
+    {
+      icon: BsCloudSunFill,
+      time: "9-12PM",
+      name: "Morning",
+    },
+    {
+      icon: BsFillSunFill,
+      time: "12-3PM",
+      name: "Afternoon",
+    },
+    {
+      icon: BsSun,
+      time: "3-6PM",
+      name: "Evening",
+    },
+    {
+      icon: IoCloudyNight,
+      time: "6-9PM",
+      name: "Night",
+    },
+  ];
   
   // Form States
   const [selectedType, setSelectedType] = useState(allTypes[0].id)
@@ -133,7 +151,7 @@ function Appointment() {
           <SelectOption  selectedType={selectedType} setSelectedType={setSelectedType} allTypes={allTypes} />
           <SelectDoctor selectedDoctor={selectedDoctor} setSelectedDoctor={setSelectedDoctor}/>
           <DatePicker date={selectedDate} setDate={setSelectedDate} />
-          <SelectTime timeSlots={timeSlots} selectedTime={selectedTime} setSelectedTime={setSelectedTime} />
+          <SelectTime timeOptions={timeOptions} selectedTime={selectedTime} setSelectedTime={setSelectedTime} />
           <InputTags value={selectedSymptoms} onChange={setSelectedSymptoms} />
           <div className='flex justify-end'>
             <button
