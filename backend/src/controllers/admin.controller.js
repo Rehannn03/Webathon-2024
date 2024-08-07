@@ -32,7 +32,7 @@ const verifyDoctor = asyncHandler(async (req,res)=>{
     )
 })
 
-const getAllEarnings=asyncHandler(async(req,res)=>{
+const getAllEarnings=asyncHandler(async(_,res)=>{
     const appointments=Appointment.aggregate([
         {
             $match:{
@@ -60,6 +60,8 @@ const getAllEarnings=asyncHandler(async(req,res)=>{
         }
     ])
 
+    const totalAppointment= await Appointment.countDocuments()
+
     const totalPatientDiagnosied=(await appointments).length
 
     const totalMoneyEarned=(await appointments).reduce((acc,curr)=>{
@@ -70,9 +72,9 @@ const getAllEarnings=asyncHandler(async(req,res)=>{
     .status(200)
     .json(
         new ApiResponse(200,{
-            totalPatientDiagnosied,
-            totalMoneyEarned,
-            appointments:await appointments
+            earnings:totalMoneyEarned,
+            completed:totalPatientDiagnosied,
+            total:totalAppointment
         })
     )
 })

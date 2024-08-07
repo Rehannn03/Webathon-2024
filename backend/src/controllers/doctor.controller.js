@@ -4,6 +4,8 @@ import { ApiResponse } from "../utils/apiResponse.js";
 import Doctor from "../model/doctor.model.js";
 import Appointment from "../model/appointments.model.js";
 import Consultation from "../model/consultation.model.js";
+import uploadOnCloudinary from '../utils/cloudinary.js'
+import User from "../model/user.model.js";
 const updateInfo=asyncHandler(async(req,res)=>{
     const user=req.user
 
@@ -182,6 +184,36 @@ const updateAppointment=asyncHandler(async(req,res)=>{
     )
 })
 
+const activateAppointment=asyncHandler(async(req,res)=>{
+    const {appointmentId,link}=req.body
+
+    const appointment=await Appointment.findByIdAndUpdate({
+        _id:appointmentId
+    },
+    {
+        $set:{
+            status:'active',
+            link
+        }
+    },
+    {
+        new:true
+    }).select('-createdAt -updatedAt -__v -patientId -doctorId -date -time -day -symptoms -note')
+
+    if(!appointment){
+        throw new ApiError(404,'Appointment not found')
+    }
+
+    return res
+    .status(200)
+    .json(
+        new ApiResponse(200,{
+            message:'Appointment activated successfully',
+            appointment
+        })
+    )
+})
+
 const fillConsultation=asyncHandler(async(req,res)=>{
     const {appointmentId,diagnosis,prescription,followUp,symptoms}=req.body
     const checkVerify=await Doctor.findOne({userId:req.user._id})
@@ -221,7 +253,7 @@ const fillConsultation=asyncHandler(async(req,res)=>{
     )
 })
 
-const getSpecialistCount=asyncHandler(async(req,res)=>{
+const getSpecialistCount=asyncHandler(async(_,res)=>{
     const count=await Doctor.aggregate([
         {
             $group:{
@@ -274,6 +306,11 @@ const earnings=asyncHandler(async(req,res)=>{
         }
     ])
 
+    const allAppointments=await Appointment
+        .find({
+            doctorId:checkVerify._id,
+        })
+
     const earnings=appointments.reduce((acc,appointment)=>{
         return acc+appointment.doctor.consultationFee
     },0)
@@ -282,7 +319,9 @@ const earnings=asyncHandler(async(req,res)=>{
     .status(200)
     .json(
         new ApiResponse(200,{
-            earnings
+            earnings,
+            completed:appointments.length,
+            total: allAppointments.length
         })
     )
 
@@ -300,5 +339,6 @@ export {
     updateAppointment,
     fillConsultation,
     getSpecialistCount,
+    activateAppointment,
     earnings
 }

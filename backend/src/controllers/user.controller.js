@@ -98,8 +98,6 @@ const getUserProfile=asyncHandler(async(req,res)=>{
 
 const updateProfile=asyncHandler(async(req,res)=>{
     const {age,contact,address,gender,city, existingDiseases, allergies, isDiabetic, isPregnant, isBP}=req.body
-    const avatarPath=req.file?.path
-    const avatar=await uploadOnCloudinary(avatarPath)
     const user=await User.findByIdAndUpdate(req.user._id,
         {
         $set:{
@@ -130,11 +128,41 @@ const updateProfile=asyncHandler(async(req,res)=>{
         }))
 })
 
+const updatePfp=asyncHandler(async(req,res)=>{
+    const avatarPath=req.file?.path
 
+    const avatar=await uploadOnCloudinary(avatarPath)
+
+    const user=await User.findByIdAndUpdate({
+        _id:req.user._id
+    },
+    {
+        $set:{
+            avatar:avatar.secure_url
+        }
+    },
+    {
+        new:true
+    }).select('-createdAt -updatedAt -__v -password -role -profile')
+
+    if(!user){
+        throw new ApiError(400,'Profile picture not updated')
+    }
+
+    return res
+    .status(200)
+    .json(
+        new ApiResponse(200,{
+            message:'Profile picture updated successfully',
+            user
+        })
+    )
+})
 export {
     registerUser,
     loginUser,
     logoutUser,
     getUserProfile,
-    updateProfile
+    updateProfile,
+    updatePfp
 }
