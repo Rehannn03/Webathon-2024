@@ -26,6 +26,7 @@ export default function FullCalenderComponent({ events = [] }) {
                 plugins={[dayGridPlugin]}
                 initialView="dayGridMonth"
                 events={events}
+                eventColor='#795cfa'
                 customButtons={{
                     fullScreen: {
                         text: `${isFullScreen ? 'Close' : 'Expand'}`,

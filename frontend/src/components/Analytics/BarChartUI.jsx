@@ -26,30 +26,29 @@ const chartData = [
 ];
 
 const chartConfig = {
-  earnings: {
-    label: "Earnings in $",
+  count: {
+    label: "Frequency",
     color: "#010101",
   },
 };
-const BarChartUI = () => {
+const BarChartUI = ({data}) => {
   return (
-    <div className="m-5 flex-1 p-8 border-2 w-[650px] h-[400px]">
+
       <ChartContainer config={chartConfig} className="w-full">
-        <BarChart accessibilityLayer data={chartData}>
+        <BarChart accessibilityLayer data={data}>
           <CartesianGrid vertical={false} />
           <XAxis
-            dataKey="month"
+            dataKey="_id"
             tickLine={false}
             tickMargin={10}
             axisLine={false}
-            tickFormatter={(value) => value.slice(0, 3)}
           />
           <ChartTooltip content={<ChartTooltipContent />} />
           <ChartLegend content={<ChartLegendContent />} />
-          <Bar dataKey="earnings" fill="var(--color-earnings)" radius={4} />
+          <Bar dataKey="count" fill="#795cfa" radius={4} />
         </BarChart>
       </ChartContainer>
-    </div>
+
   );
 };
 

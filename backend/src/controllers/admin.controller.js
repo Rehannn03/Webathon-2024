@@ -60,6 +60,8 @@ const getAllEarnings=asyncHandler(async(_,res)=>{
         }
     ])
     
+    const totalAppointment= await Appointment.countDocuments()
+
     const totalPatientDiagnosied=(await appointments).length
 
     const totalMoneyEarned=(await appointments).reduce((acc,curr)=>{
@@ -71,7 +73,8 @@ const getAllEarnings=asyncHandler(async(_,res)=>{
     .json(
         new ApiResponse(200,{
             earnings:totalMoneyEarned,
-            completed:totalPatientDiagnosied
+            completed:totalPatientDiagnosied,
+            total:totalAppointment
         })
     )
 })

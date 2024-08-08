@@ -69,10 +69,10 @@ export default function Notifications({ appointment }) {
       <Box sx={{ width: "100%" }}>
         <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
           <Tabs
+            TabIndicatorProps={{style: {background:'#795cfa'}}}
             value={value}
             onChange={handleChange}
             textColor="inherit"
-            indicatorColor="primary"
             aria-label="basic tabs example"
           >
             <Tab label="Today" {...a11yProps(0)} />

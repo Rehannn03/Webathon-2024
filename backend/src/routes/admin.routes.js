@@ -5,7 +5,8 @@ import {
     getAllpatients,
     getAllAppointments,
     symptoms,
-    dailyAppointments
+    dailyAppointments,
+    demographics
 } from '../controllers/admin.controller.js'
 import express from 'express'
 import { verifyJWT } from '../middleware/auth.middleware.js'
@@ -18,4 +19,5 @@ router.get('/getPatients',verifyJWT,getAllpatients)
 router.get('/getAppointments',verifyJWT,getAllAppointments)
 router.get('/symptoms',verifyJWT,symptoms)
 router.get('/daily-appointments',verifyJWT,dailyAppointments)
+router.get('/demographics',verifyJWT,demographics)
 export default router

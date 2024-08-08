@@ -3,9 +3,10 @@ import React from 'react'
 export default function Tabs({ tabs, activeTab, setActiveTab, state }) {
     const stateColors = {
         "all": "bg-primary",
-        "pending": "bg-yellow-300",
+        "pending": "bg-yellow-700",
         "approved": "bg-green-300",
         "rejected": "bg-red-300",
+        "completed": "bg-blue-300",
     }
   return (
     <section className="overflow-hidden mt-2 mb-4 bg-gray-200 p-[6px] rounded-lg">

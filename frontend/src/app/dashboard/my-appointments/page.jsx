@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { use, useEffect, useState } from "react";
 import { useUserStore } from "@/stores/store";
 import { fetchAndSetUserStore } from "@/lib/fetchAndSetUserStore";
 import { useToast } from "@/components/ui/use-toast";
@@ -10,7 +10,7 @@ import Image from "next/image";
 import AppointmentCard from "@/components/my-appointment/AppointmentCardOLD";
 import { useRouter } from "next/navigation";
 import NextAppointment from "../../../components/my-appointment/NextAppointment";
-
+import Tabs from "@/components/my-appointment/Tabs";
 function MyAppointments() {
   const { user, update } = useUserStore();
   const { toast } = useToast();
@@ -72,11 +72,13 @@ function MyAppointments() {
   };
 
   useEffect(() => {
-    if (user && !allAppointments.length > 0) {
+    if (user) {
       getAllAppointment();
     }
     console.log(allAppointments);
   }, [user, allAppointments]);
+
+
 
   return (
     <div className="flex flex-col col-span-3 items-center justify-center mt-12">

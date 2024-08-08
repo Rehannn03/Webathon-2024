@@ -32,12 +32,6 @@ function Sidebar() {
       allowed: ["doctor"],
     },
     {
-      name: "Consultations",
-      icon: <FaUserDoctor className="w-5 h-5" />,
-      link: "/dashboard/consultations",
-      allowed: ["doctor"],
-    },
-    {
       name: "Profile",
       icon: <FaUser className="w-5 h-5" />,
       link: "/dashboard/profile",

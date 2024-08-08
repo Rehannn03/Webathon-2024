@@ -11,141 +11,67 @@ import {
 } from "@/components/ui/chart";
 
 
-const chartData = [
-  {
-    month: "January",
-    HepA: 4000,
-    HepB: 2400,
-    get infected() {
-      return this.HepA + this.HepB;
-    },
-  },
-  {
-    month: "February",
-    HepA: 3000,
-    HepB: 1398,
-    get infected() {
-      return this.HepA + this.HepB;
-    },
-  },
-  {
-    month: "March",
-    HepA: 2000,
-    HepB: 9800,
-    get infected() {
-      return this.HepA + this.HepB;
-    },
-  },
-  // Add data for the remaining months here
-  {
-    month: "April",
-    HepA: 1500,
-    HepB: 5000,
-    get infected() {
-      return this.HepA + this.HepB;
-    },
-  },
-  {
-    month: "May",
-    HepA: 2500,
-    HepB: 3000,
-    get infected() {
-      return this.HepA + this.HepB;
-    },
-  },
-  {
-    month: "June",
-    HepA: 1800,
-    HepB: 4000,
-    get infected() {
-      return this.HepA + this.HepB;
-    },
-  },
-  {
-    month: "July",
-    HepA: 3200,
-    HepB: 2800,
-    get infected() {
-      return this.HepA + this.HepB;
-    },
-  },
-  {
-    month: "August",
-    HepA: 4000,
-    HepB: 2000,
-    get infected() {
-      return this.HepA + this.HepB;
-    },
-  },
-  {
-    month: "September",
-    HepA: 5000,
-    HepB: 1500,
-    get infected() {
-      return this.HepA + this.HepB;
-    },
-  },
-  {
-    month: "October",
-    HepA: 6000,
-    HepB: 1000,
-    get infected() {
-      return this.HepA + this.HepB;
-    },
-  },
-  {
-    month: "November",
-    HepA: 7000,
-    HepB: 500,
-    get infected() {
-      return this.HepA + this.HepB;
-    },
-  },
-  {
-    month: "December",
-    HepA: 8000,
-    HepB: 200,
-    get infected() {
-      return this.HepA + this.HepB;
-    },
-  },
-];
 
 const chartConfig = {
-  HepA: {
-    label: "Earnings in $",
+  count: {
+    label: "Number of Appointments",
     color: "#010101",
   },
-  HepB:{
-    label: "Earnings in $",
-    color: "#030141",
-  },
 }
-const LineChartUI = () => {
+
+  function addMissingDates(data){
+        // get the month in the data
+        // fill out the missing dates of the month
+        const result = []
+        const date = new Date()
+        const month = date.getMonth() + 1
+        const year = date.getFullYear()
+        const daysInMonth = new Date(year, month, 0).getDate()
+        const dates = data.map(d => d._id)
+        console.log("Dates:", dates)
+        for(let i = 1; i <= daysInMonth; i++){
+            // check if the date is in the data
+            const date = `${year}-${month.toString().padStart(2,'0')}-${i.toString().padStart(2,'0')}`
+            console.log("Date:", date)
+            const found = dates.find(d => d === date)
+            if(!found){
+                result.push({
+                    _id:date,
+                    count:0
+                })
+            } else {
+                console.log("Found:", found)
+                result.push(data.find(d => d._id === date))
+            }
+        }
+        console.log("Result:", result)
+        return result   
+    }   
+const LineChartUI = ({data}) => {
+  console.log(data)
+  const result = addMissingDates(data)
   return (
-    <div className="m-5 flex-1 p-8 border-2 w-[650px] h-[400px]">
+
       <ChartContainer config={chartConfig}>
-        <LineChart accessibilityLayer data={chartData}>
+        <LineChart accessibilityLayer data={result}>
           <CartesianGrid vertical={false} />
           <XAxis
-            dataKey="month"
+            dataKey="_id"
             tickLine={false}
             tickMargin={10}
             axisLine={false}
-            tickFormatter={(value) => value.slice(0, 3)}
           />
           <YAxis
-            dataKey="infected"
+            dataKey="count"
             tickLine={false}
             tickMargin={10}
           />
           <ChartTooltip content={<ChartTooltipContent />} />
           <ChartLegend content={<ChartLegendContent />} />
-          <Line dataKey="HepA" fill="var(--color-HepA)" radius={4} />
-          <Line dataKey="HepB" fill="var(--color-HepB)" radius={4} />
+          <Line dataKey="count" fill="#795cfa" radius={4} />
         </LineChart>
       </ChartContainer>
-    </div>
+
   );
 };
 
