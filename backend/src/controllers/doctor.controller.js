@@ -8,11 +8,11 @@ import uploadOnCloudinary from '../utils/cloudinary.js'
 import User from "../model/user.model.js";
 const updateInfo=asyncHandler(async(req,res)=>{
     const user=req.user
-    const degreePath=req.files?.path
     let degreeUrl=""
-    console.log(degreePath)
     
-    if(degreePath){
+    
+    if(req.files){  
+        const degreePath=req.files?.path
         const result=await uploadOnCloudinary(degreePath)
         console.log(result);
         
@@ -34,7 +34,7 @@ const updateInfo=asyncHandler(async(req,res)=>{
                 experience,
                 qualification,
                 consultationFee,
-                degree:degreeUrl
+                degree:degreeUrl || ""
             }
         },
         {
@@ -79,7 +79,7 @@ const updateInfo=asyncHandler(async(req,res)=>{
 })
 
 const getDoctor=asyncHandler(async(req,res)=>{
-    const doctor=await Doctor.findOne({userId:req.user._id}).select('-createdAt -updatedAt -__v').populate('userId','name email profile')
+    const doctor=await Doctor.findOne({userId:req.user._id}).select('-createdAt -updatedAt -__v').populate('userId','name email profile avatar')
     if(!doctor){
         throw new ApiError(404,'Doctor not found')
     }
