@@ -124,7 +124,7 @@ const AppointmentCard = ({ appointment, getAllAppointment }) => {
         <AppointmentModal
           appointment={appointment}
           onClose={closeModal}
-          getAllAppointments={getAllAppointments}
+          getAllAppointments={getAllAppointment}
         />
       )}
     </div>

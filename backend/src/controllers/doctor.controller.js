@@ -329,6 +329,17 @@ const earnings=asyncHandler(async(req,res)=>{
 
 })
 
+const getAllDoctors=asyncHandler(asyncHandler(async(_,res)=>{
+    const doctors=await Doctor.find().select('-createdAt -updatedAt -__v').populate('userId','name avatar email profile')
+    return res
+    .status(200)
+    .json(
+        new ApiResponse(200,{
+            doctors
+        })
+    )
+}))
+
 // Appointment time slot with doctor bussiness 
 // Doctor specialisty wise grouping 
 // Appointment status is live 
@@ -341,5 +352,6 @@ export {
     fillConsultation,
     getSpecialistCount,
     activateAppointment,
-    earnings
+    earnings,
+    getAllDoctors
 }
