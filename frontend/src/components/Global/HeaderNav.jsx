@@ -43,7 +43,7 @@ const HeaderNav = () => {
                   <li className="mr-9">
                     <a
                       className="inline-block text-sm font-bold text-gray-900 hover:text-gray-700"
-                      href="#"
+                      href="/features"
                     >
                       Features
                     </a>
@@ -51,7 +51,9 @@ const HeaderNav = () => {
                   <li className="mr-9">
                     <a
                       className="inline-block text-sm font-bold text-gray-900 hover:text-gray-700"
-                      href="#"
+                      href="https://docs.ipfs.tech/concepts/privacy-and-encryption/#what-s-public-on-ipfs"
+                      target="_blank"
+                      rel="noopener noreferrer"
                     >
                       Data & Security
                     </a>
@@ -59,9 +61,9 @@ const HeaderNav = () => {
                   <li className="mr-9">
                     <a
                       className="inline-block text-sm font-bold text-gray-900 hover:text-gray-700"
-                      href="#"
+                      href="/appointment"
                     >
-                      Resources
+                      Appointment
                     </a>
                   </li>
                   <li>
@@ -85,7 +87,7 @@ const HeaderNav = () => {
                       <div className="w-full md:w-auto p-2">
                         <a
                           className="block w-full px-4 py-2.5 text-sm text-center text-gray-900 font-bold bg-white hover:bg-gray-50 focus:ring-4 focus:ring-gray-200 border rounded-full"
-                          href="/sign-in" 
+                          href="/sign-in"
                         >
                           Log In
                         </a>
@@ -93,7 +95,7 @@ const HeaderNav = () => {
                       <div className="w-full md:w-auto p-2">
                         <a
                           className="block w-full px-4 py-2.5 text-sm text-center text-white font-bold bg-primary hover:secondary focus:ring-4 focus:ring-blue-200 rounded-full"
-                          href="/sign-up" 
+                          href="/sign-up"
                         >
                           Get Started
                         </a>
@@ -103,7 +105,7 @@ const HeaderNav = () => {
                     <div className="w-full md:w-auto p-2">
                       <a
                         className="block w-full px-4 py-2.5 text-sm text-center text-white font-bold bg-primary hover:secondary focus:ring-4 focus:ring-blue-200 rounded-full"
-                        href="/profile" 
+                        href="/profile"
                       >
                         Profile
                       </a>
@@ -245,13 +247,13 @@ const HeaderNav = () => {
                   <>
                     <a
                       className="block py-4 px-5 text-gray-900 hover:bg-primary/50 rounded-lg"
-                      href="/sign-in" 
+                      href="/sign-in"
                     >
                       Log In
                     </a>
                     <a
                       className="block py-4 px-5 text-gray-900 hover:bg-primary/50 rounded-lg"
-                      href="/sign-up" 
+                      href="/sign-up"
                     >
                       Get Started
                     </a>
